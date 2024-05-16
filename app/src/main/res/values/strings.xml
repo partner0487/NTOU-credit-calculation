@@ -16,5 +16,14 @@
     <string name="english3">進階英文</string>
     <string name="english4">英文畢業門檻</string>
     <string name="general">博雅(通識)領域</string>
+    <string name="AI">人工智慧</string>
+    <string name="general_input">博雅領域(領域名稱)</string>
+    <string name="ocean">海洋科學概論</string>
+    <string name="sport">體育領域</string>
+    <string name="sport_input">體育</string>
+    <string name="swim">游泳畢業門檻</string>
+    <string name="clean">愛校服務</string>
+    <string name="clean1">服務學習\n愛校服務(一)</string>
+    <string name="clean2">服務學習\n愛校服務(二)</string>
 
 </resources>
