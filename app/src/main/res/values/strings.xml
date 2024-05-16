@@ -10,4 +10,11 @@
     <string name="chinese">國文領域</string>
     <string name="chinese1">國文領域(一)</string>
     <string name="chinese2">國文領域(二)</string>
+    <string name="english">英文領域</string>
+    <string name="english1">大一英文(上)</string>
+    <string name="english2">大一英文(下)</string>
+    <string name="english3">進階英文</string>
+    <string name="english4">英文畢業門檻</string>
+    <string name="general">博雅(通識)領域</string>
+
 </resources>
