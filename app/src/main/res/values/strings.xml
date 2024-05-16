@@ -3,4 +3,11 @@
     <string name="title_home">首頁</string>
     <string name="title_pdf" tools:ignore="ExtraTranslation">導出PDF</string>
     <string name="title_csv" tools:ignore="ExtraTranslation">導入CSV</string>
+    <string name="name">名字</string>
+    <string name="id">學號</string>
+    <string name="required">必修</string>
+    <string name="Linear_Algebra">線性代數</string>
+    <string name="chinese">國文領域</string>
+    <string name="chinese1">國文領域(一)</string>
+    <string name="chinese2">國文領域(二)</string>
 </resources>
