@@ -5,8 +5,6 @@
     <string name="title_csv" tools:ignore="ExtraTranslation">導入CSV</string>
     <string name="name">名字</string>
     <string name="id">學號</string>
-    <string name="required">必修</string>
-    <string name="Linear_Algebra">線性代數</string>
     <string name="chinese">國文領域</string>
     <string name="chinese1">國文領域(一)</string>
     <string name="chinese2">國文領域(二)</string>
@@ -25,5 +23,29 @@
     <string name="clean">愛校服務</string>
     <string name="clean1">服務學習\n愛校服務(一)</string>
     <string name="clean2">服務學習\n愛校服務(二)</string>
+    <string name="required">系訂專業必修</string>
+    <string name="physic">普通物理</string>
+    <string name="computers">計算機概論</string>
+    <string name="calculus1">微積分(上)</string>
+    <string name="calculus2">微積分(下)</string>
+    <string name="programming">程式設計</string>
+    <string name="data_structure">資料結構</string>
+    <string name="discrete">離散數學</string>
+    <string name="algorithm">演算法</string>
+    <string name="digital_logic">數位邏輯</string>
+    <string name="digital_logic_exp">數位邏輯實驗</string>
+    <string name="programming2">程式設計(二)</string>
+    <string name="computational_histology">計算機組織學</string>
+    <string name="linear_algebra">線性代數</string>
+    <string name="probability">機率論</string>
+    <string name="os">作業系統</string>
+    <string name="network">電腦網路</string>
+    <string name="project_discussion">資訊專題討論</string>
+    <string name="project1">資工系專題(一)</string>
+    <string name="project2">資工系專題(二)</string>
+    <string name="core_elective">核心選修課程(至少12學分)</string>
+    <string name="add">新增</string>
+    <string name="elective">選修課程</string>
+
 
 </resources>
