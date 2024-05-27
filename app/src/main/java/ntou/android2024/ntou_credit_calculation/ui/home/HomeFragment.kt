@@ -1,16 +1,19 @@
 package ntou.android2024.ntou_credit_calculation.ui.home
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,57 +36,160 @@ class HomeFragment : Fragment() {
         val layout: ConstraintLayout = binding.layout
 
         val addCoreElective: Button = binding.addCoreElective
+        val deleteCoreElective: Button = binding.deleteCoreElective
+        val addElective: Button = binding.addElective
+        val deleteElective: Button = binding.deleteElective
         var coreElectiveNum = 0
+        var electiveNum = 4000
+
+        val r: Resources = resources
+
+        //新增核心選修
         addCoreElective.setOnClickListener {
+
+            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
+            val marginEnd = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20F ,r.displayMetrics).toInt()
+
             coreElectiveNum+=1
-
             val dynamicCheckBox = CheckBox(context)
-            dynamicCheckBox.width = 48
-            setMargins(dynamicCheckBox,0,8,0,0)
-
-            val dynamicTextview = EditText(context)
-            dynamicTextview.hint = "Dynamically added text"
-            dynamicTextview.tag = "@+id/core_elective_$coreElectiveNum"
-            setMargins(dynamicTextview,0,8,16,0)
-
+            dynamicCheckBox.id = coreElectiveNum
+            dynamicCheckBox.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36F ,r.displayMetrics).toInt()
+            dynamicCheckBox.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
             layout.addView(dynamicCheckBox)
+
+            coreElectiveNum+=1
+            val dynamicTextview = EditText(context)
+            dynamicTextview.id = coreElectiveNum
+            dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
+            dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
+            dynamicTextview.hint = resources.getString(R.string.core_elective_name)
+            dynamicTextview.textSize = 14F
             layout.addView(dynamicTextview)
+
+            val constraintSet = ConstraintSet().apply {
+                clone(layout);
+                if(coreElectiveNum % 4 == 2){
+                    if(coreElectiveNum == 2){
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    else{
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.core_elective, ConstraintSet.LEFT);
+                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT);
+
+                    //按鈕往下
+                    clear(R.id.add_core_elective, ConstraintSet.TOP)
+                    connect(R.id.add_core_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+                    clear(R.id.delete_core_elective, ConstraintSet.TOP)
+                    connect(R.id.delete_core_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+
+                }
+                else{
+                    if(coreElectiveNum == 4){
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    else{
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    connect(dynamicTextview.id, ConstraintSet.RIGHT, R.id.layout, ConstraintSet.RIGHT, marginEnd)
+                    connect(dynamicCheckBox.id, ConstraintSet.RIGHT, dynamicTextview.id, ConstraintSet.LEFT);
+
+                }
+                applyTo(layout);
+            }
         }
-        /*
 
-        <CheckBox
-            android:id="@+id/sport4"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/sport4_text1"
-            app:layout_constraintTop_toBottomOf="@+id/sport2"
-            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+        //刪除核心選修
+        deleteCoreElective.setOnClickListener {
+            if(coreElectiveNum == 0) return@setOnClickListener
+            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
 
-        <EditText
-            android:id="@+id/sport4_text1"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="@string/sport_input"
-            android:inputType="text"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport2_text1"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-        */
+            val constraintSet = ConstraintSet().apply {
+                clone(layout)
+
+                //按鈕往上
+                if(coreElectiveNum % 4 == 0){
+                    clear(R.id.add_core_elective, ConstraintSet.TOP)
+                    clear(R.id.delete_core_elective, ConstraintSet.TOP)
+                    if(coreElectiveNum == 0){
+                        connect(R.id.add_core_elective, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(R.id.delete_core_elective, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    else{
+                        connect(R.id.add_core_elective, ConstraintSet.TOP, coreElectiveNum, ConstraintSet.BOTTOM, marginTop);
+                        connect(R.id.delete_core_elective, ConstraintSet.TOP, coreElectiveNum, ConstraintSet.BOTTOM, marginTop);
+                    }
+                }
+                //applyTo(layout);
+            }
+        }
+
+        //新增選修
+        addElective.setOnClickListener {
+
+            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
+            val marginEnd = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20F ,r.displayMetrics).toInt()
+
+            electiveNum+=1
+            val dynamicCheckBox = CheckBox(context)
+            dynamicCheckBox.id = electiveNum
+            dynamicCheckBox.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36F ,r.displayMetrics).toInt()
+            dynamicCheckBox.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
+            layout.addView(dynamicCheckBox)
+
+            electiveNum+=1
+            val dynamicTextview = EditText(context)
+            dynamicTextview.id = electiveNum
+            dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
+            dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
+            dynamicTextview.hint = resources.getString(R.string.elective_name)
+            dynamicTextview.textSize = 14F
+            layout.addView(dynamicTextview)
+
+            val constraintSet = ConstraintSet().apply {
+                clone(layout);
+                if(electiveNum % 4 == 2){
+                    if(electiveNum == 4002){
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    else{
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.elective, ConstraintSet.LEFT);
+                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT);
+
+                    //按鈕往下
+                    clear(R.id.add_elective, ConstraintSet.TOP)
+                    connect(R.id.add_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+                    clear(R.id.delete_elective, ConstraintSet.TOP)
+                    connect(R.id.delete_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+
+                }
+                else{
+                    if(electiveNum == 4004){
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    else{
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    }
+                    connect(dynamicTextview.id, ConstraintSet.RIGHT, R.id.layout, ConstraintSet.RIGHT, marginEnd)
+                    connect(dynamicCheckBox.id, ConstraintSet.RIGHT, dynamicTextview.id, ConstraintSet.LEFT);
+
+                }
+                applyTo(layout);
+            }
+        }
 
         return root
-    }
-
-    fun setMargins(v: View, l: Int, t: Int, r: Int, b: Int) {
-        if (v.layoutParams is MarginLayoutParams) {
-            val p = v.layoutParams as MarginLayoutParams
-            p.setMargins(l, t, r, b)
-            v.requestLayout()
-        }
     }
 
     override fun onDestroyView() {

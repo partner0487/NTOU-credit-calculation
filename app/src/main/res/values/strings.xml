@@ -43,9 +43,11 @@
     <string name="project_discussion">資訊專題討論</string>
     <string name="project1">資工系專題(一)</string>
     <string name="project2">資工系專題(二)</string>
-    <string name="core_elective">核心選修課程(至少12學分)</string>
     <string name="add">新增</string>
+    <string name="delete">刪除</string>
+    <string name="core_elective">核心選修課程(至少12學分)</string>
+    <string name="core_elective_name">核心選修課程名稱</string>
     <string name="elective">選修課程</string>
-
+    <string name="elective_name">選修課程名稱</string>
 
 </resources>
