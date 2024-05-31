@@ -1,7 +1,7 @@
 # 海大資工 學分計算機
 
 ## 首頁
-![image](https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/home.jpg){:width="50%"}
+![image](https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/home.jpg){width="50%"}
 
 ## 後端
 首要：可以生成PDF檔
