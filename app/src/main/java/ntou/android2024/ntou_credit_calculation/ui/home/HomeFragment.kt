@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +40,10 @@ class HomeFragment : Fragment() {
         val deleteCoreElective: Button = binding.deleteCoreElective
         val addElective: Button = binding.addElective
         val deleteElective: Button = binding.deleteElective
-        var coreElectiveNum = 0
-        var electiveNum = 4000
 
         val r: Resources = resources
+        var coreElectiveNum = 0
+        var electiveNum = 4000
 
         //新增核心選修
         addCoreElective.setOnClickListener {
@@ -67,18 +68,18 @@ class HomeFragment : Fragment() {
             layout.addView(dynamicTextview)
 
             val constraintSet = ConstraintSet().apply {
-                clone(layout);
+                clone(layout)
                 if(coreElectiveNum % 4 == 2){
                     if(coreElectiveNum == 2){
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
+                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop)
+                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop)
                     }
                     else{
                         connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
                         connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
                     }
-                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.core_elective, ConstraintSet.LEFT);
-                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT);
+                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.core_elective, ConstraintSet.LEFT)
+                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT)
 
                     //按鈕往下
                     clear(R.id.add_core_elective, ConstraintSet.TOP)
@@ -108,10 +109,9 @@ class HomeFragment : Fragment() {
         deleteCoreElective.setOnClickListener {
             if(coreElectiveNum == 0) return@setOnClickListener
             val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
-
+            super.onDestroyView()
             val constraintSet = ConstraintSet().apply {
                 clone(layout)
-
                 //按鈕往上
                 if(coreElectiveNum % 4 == 0){
                     clear(R.id.add_core_elective, ConstraintSet.TOP)

@@ -1,12 +1,17 @@
 package ntou.android2024.ntou_credit_calculation.ui.dashboard
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -22,17 +27,35 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val test: Button = binding.test
+        test.setOnClickListener{
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*"
+            resultLauncher.launch(intent)
         }
+
         return root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val text: TextView = binding.textDashboard
+            val data: Intent? = result.data
+
+            if (data != null) {
+                val uri: Uri? = data.data
+                if(uri != null){
+                    text.text = uri.path.toString()
+                }
+                else{
+                    text.text = "無效"
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
