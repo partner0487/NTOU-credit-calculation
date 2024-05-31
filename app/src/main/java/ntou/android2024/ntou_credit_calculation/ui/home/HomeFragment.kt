@@ -34,7 +34,6 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,145 +59,37 @@ class HomeFragment : Fragment() {
 
         //新增核心選修
         addCoreElective.setOnClickListener {
-
-            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
-            val marginEnd = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20F ,r.displayMetrics).toInt()
-
-            coreElectiveNum+=1
-            val dynamicCheckBox = CheckBox(context)
-            dynamicCheckBox.id = coreElectiveNum
-            dynamicCheckBox.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36F ,r.displayMetrics).toInt()
-            dynamicCheckBox.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
-            layout.addView(dynamicCheckBox)
-
-            coreElectiveNum+=1
-            val dynamicTextview = EditText(context)
-            dynamicTextview.id = coreElectiveNum
-            dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
-            dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
-            dynamicTextview.hint = resources.getString(R.string.core_elective_name)
-            dynamicTextview.textSize = 14F
-            layout.addView(dynamicTextview)
-
-            val constraintSet = ConstraintSet().apply {
-                clone(layout)
-                if(coreElectiveNum % 4 == 2){
-                    if(coreElectiveNum == 2){
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop)
-                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop)
-                    }
-                    else{
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.core_elective, ConstraintSet.LEFT)
-                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT)
-
-                    //按鈕往下
-                    clear(R.id.add_core_elective, ConstraintSet.TOP)
-                    connect(R.id.add_core_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
-                    clear(R.id.delete_core_elective, ConstraintSet.TOP)
-                    connect(R.id.delete_core_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
-
-                }
-                else{
-                    if(coreElectiveNum == 4){
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    else{
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    connect(dynamicTextview.id, ConstraintSet.RIGHT, R.id.layout, ConstraintSet.RIGHT, marginEnd)
-                    connect(dynamicCheckBox.id, ConstraintSet.RIGHT, dynamicTextview.id, ConstraintSet.LEFT);
-
-                }
-                applyTo(layout);
-            }
+            coreElectiveNum+=2
+            val className = r.getString(R.string.core_elective_name)
+            val top = R.id.core_elective
+            addClass(coreElectiveNum, r, layout, className, top)
         }
 
         //刪除核心選修
         deleteCoreElective.setOnClickListener {
             if(coreElectiveNum == 0) return@setOnClickListener
-            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
-            super.onDestroyView()
-            val constraintSet = ConstraintSet().apply {
-                clone(layout)
-                //按鈕往上
-                if(coreElectiveNum % 4 == 0){
-                    clear(R.id.add_core_elective, ConstraintSet.TOP)
-                    clear(R.id.delete_core_elective, ConstraintSet.TOP)
-                    if(coreElectiveNum == 0){
-                        connect(R.id.add_core_elective, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
-                        connect(R.id.delete_core_elective, ConstraintSet.TOP, R.id.core_elective, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    else{
-                        connect(R.id.add_core_elective, ConstraintSet.TOP, coreElectiveNum, ConstraintSet.BOTTOM, marginTop);
-                        connect(R.id.delete_core_elective, ConstraintSet.TOP, coreElectiveNum, ConstraintSet.BOTTOM, marginTop);
-                    }
-                }
-                //applyTo(layout);
+            else {
+                coreElectiveNum-=2
+                val top = R.id.core_elective
+                deleteClass(coreElectiveNum, r, layout, top)
             }
         }
 
         //新增選修
         addElective.setOnClickListener {
+            electiveNum+=2
+            val className = resources.getString(R.string.elective_name)
+            val top = R.id.elective
+            addClass(electiveNum, r, layout, className, top)
+        }
 
-            val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
-            val marginEnd = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20F ,r.displayMetrics).toInt()
-
-            electiveNum+=1
-            val dynamicCheckBox = CheckBox(context)
-            dynamicCheckBox.id = electiveNum
-            dynamicCheckBox.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36F ,r.displayMetrics).toInt()
-            dynamicCheckBox.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
-            layout.addView(dynamicCheckBox)
-
-            electiveNum+=1
-            val dynamicTextview = EditText(context)
-            dynamicTextview.id = electiveNum
-            dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
-            dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
-            dynamicTextview.hint = resources.getString(R.string.elective_name)
-            dynamicTextview.textSize = 14F
-            layout.addView(dynamicTextview)
-
-            val constraintSet = ConstraintSet().apply {
-                clone(layout);
-                if(electiveNum % 4 == 2){
-                    if(electiveNum == 4002){
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    else{
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    connect(dynamicCheckBox.id, ConstraintSet.LEFT, R.id.elective, ConstraintSet.LEFT);
-                    connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT);
-
-                    //按鈕往下
-                    clear(R.id.add_elective, ConstraintSet.TOP)
-                    connect(R.id.add_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
-                    clear(R.id.delete_elective, ConstraintSet.TOP)
-                    connect(R.id.delete_elective, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
-
-                }
-                else{
-                    if(electiveNum == 4004){
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, R.id.elective, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    else{
-                        connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
-                        connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
-                    }
-                    connect(dynamicTextview.id, ConstraintSet.RIGHT, R.id.layout, ConstraintSet.RIGHT, marginEnd)
-                    connect(dynamicCheckBox.id, ConstraintSet.RIGHT, dynamicTextview.id, ConstraintSet.LEFT);
-
-                }
-                applyTo(layout);
+        //刪除選修
+        deleteElective.setOnClickListener {
+            if(electiveNum == 0) return@setOnClickListener
+            else {
+                electiveNum-=2
+                val top = R.id.elective
+                deleteClass(electiveNum, r, layout, top)
             }
         }
         outputPdf.setOnClickListener{
@@ -297,6 +188,105 @@ class HomeFragment : Fragment() {
         }
         
         return root
+    }
+
+    //新增課程function
+    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int){
+
+        var start = 0
+        var addId = R.id.add_core_elective
+        var deleteId = R.id.delete_core_elective
+        if(num>=4000){
+            start = 4000
+            addId = R.id.add_elective
+            deleteId = R.id.delete_elective
+        }
+
+        val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
+        val marginEnd = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20F ,r.displayMetrics).toInt()
+
+        val dynamicCheckBox = CheckBox(context)
+        dynamicCheckBox.id = num-1
+        dynamicCheckBox.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36F ,r.displayMetrics).toInt()
+        dynamicCheckBox.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
+        layout.addView(dynamicCheckBox)
+
+        val dynamicTextview = EditText(context)
+        dynamicTextview.id = num
+        dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
+        dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
+        dynamicTextview.hint = className
+        dynamicTextview.textSize = 14F
+        layout.addView(dynamicTextview)
+
+        ConstraintSet().apply {
+            clone(layout);
+            if(num % 4 == 2){
+                if(num == start+2){
+                    connect(dynamicCheckBox.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                    connect(dynamicTextview.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                }
+                else{
+                    connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                }
+                connect(dynamicCheckBox.id, ConstraintSet.LEFT, top, ConstraintSet.LEFT);
+                connect(dynamicTextview.id, ConstraintSet.LEFT, dynamicCheckBox.id, ConstraintSet.RIGHT);
+
+                //按鈕往下
+                clear(addId, ConstraintSet.TOP)
+                connect(addId, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+                clear(deleteId, ConstraintSet.TOP)
+                connect(deleteId, ConstraintSet.TOP, dynamicCheckBox.id, ConstraintSet.BOTTOM, marginTop);
+
+            }
+            else{
+                if(num == start+4){
+                    connect(dynamicCheckBox.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                    connect(dynamicTextview.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                }
+                else{
+                    connect(dynamicCheckBox.id, ConstraintSet.TOP, dynamicCheckBox.id - 4, ConstraintSet.BOTTOM, marginTop);
+                    connect(dynamicTextview.id, ConstraintSet.TOP, dynamicTextview.id - 4, ConstraintSet.BOTTOM, marginTop);
+                }
+                connect(dynamicTextview.id, ConstraintSet.RIGHT, R.id.layout, ConstraintSet.RIGHT, marginEnd)
+                connect(dynamicCheckBox.id, ConstraintSet.RIGHT, dynamicTextview.id, ConstraintSet.LEFT);
+            }
+            applyTo(layout);
+        }
+    }
+
+    //刪除課程function
+    private fun deleteClass(num :Int, r: Resources, layout: ConstraintLayout, top:Int){
+        var start = 0
+        var addId = R.id.add_core_elective
+        var deleteId = R.id.delete_core_elective
+        if(num>=4000){
+            start = 4000
+            addId = R.id.add_elective
+            deleteId = R.id.delete_elective
+        }
+
+        val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
+        val nowText:TextView = requireView().findViewById(num+2)
+        layout.removeView(nowText);
+        val nowCheck:TextView = requireView().findViewById(num+1)
+        layout.removeView(nowCheck);
+        ConstraintSet().apply {
+            clone(layout)
+            //按鈕往上
+            clear(addId, ConstraintSet.TOP)
+            clear(deleteId, ConstraintSet.TOP)
+            if(num == start){
+                connect(addId, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                connect(deleteId, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+            }
+            else{
+                connect(addId, ConstraintSet.TOP, num, ConstraintSet.BOTTOM, marginTop);
+                connect(deleteId, ConstraintSet.TOP, num, ConstraintSet.BOTTOM, marginTop);
+            }
+            applyTo(layout);
+        }
     }
 
     override fun onDestroyView() {
