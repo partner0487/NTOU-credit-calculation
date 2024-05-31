@@ -19,8 +19,7 @@
         </action>
         <argument
             android:name="data"
-            app:argType="string"
-            android:defaultValue="csv" />
+            app:argType="string[]" />
     </fragment>
 
     <fragment

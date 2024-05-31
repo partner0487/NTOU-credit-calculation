@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentDashboardBinding
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 
 class DashboardFragment : Fragment() {
@@ -24,6 +28,7 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var str: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +41,7 @@ class DashboardFragment : Fragment() {
         val test: Button = binding.test
         test.setOnClickListener{
             val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "*/*"
+            intent.type = "text/*"
             resultLauncher.launch(intent)
         }
 
@@ -45,7 +50,7 @@ class DashboardFragment : Fragment() {
         complete.setOnClickListener{
             val bundle = Bundle().apply{
                 val text: TextView = binding.csvText
-                putString("data", text.text.toString())
+                putStringArray("data", str.toTypedArray())
             }
             findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home,bundle)
         }
@@ -61,13 +66,24 @@ class DashboardFragment : Fragment() {
             if (data != null) {
                 val uri: Uri? = data.data
                 if(uri != null){
-                    text.text = uri.path.toString()
+                    text.textSize = 20F
+                    val content = ArrayList<String>()
+                    str = readCSV(uri)//.joinToString(separator = "\n")
+                    text.text = str[0]
                 }
                 else{
                     text.text = "無效"
                 }
             }
         }
+    }
+
+    @SuppressLint("Recycle")
+    @Throws(IOException::class)
+    fun readCSV(uri: Uri): List<String> {
+        val csvFile: InputStream? = activity?.contentResolver?.openInputStream(uri)
+        val isr = InputStreamReader(csvFile, "Big5")
+        return BufferedReader(isr).readLines()
     }
 
     override fun onDestroyView() {

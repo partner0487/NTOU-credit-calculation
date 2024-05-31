@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -99,14 +100,17 @@ class HomeFragment : Fragment() {
         }
 
         //接收資料
+        var countarray = 0
         inputCsv.setOnClickListener {
-            val data = arguments?.getString("data")
+            val data = arguments?.getStringArray("data")
             val text: TextView = binding.textView
-            text.text = data
+            text.text = data?.get(countarray)
+            countarray+=1
         }
 
         return root
     }
+
 
     //新增課程function
     private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int){
