@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
 
         //刪除選修
         deleteElective.setOnClickListener {
-            if(electiveNum == 0) return@setOnClickListener
+            if(electiveNum == 4000) return@setOnClickListener
             else {
                 electiveNum-=2
                 val top = R.id.elective
@@ -119,7 +119,6 @@ class HomeFragment : Fragment() {
                 putBoolean("prd", binding.projectDiscussion.isChecked)
                 putBoolean("pr1", binding.project1.isChecked)
                 putBoolean("pr2", binding.project2.isChecked)
-
             }
             findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_notifications,

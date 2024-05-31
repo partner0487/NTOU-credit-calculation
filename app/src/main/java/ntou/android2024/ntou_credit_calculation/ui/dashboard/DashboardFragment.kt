@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -30,6 +31,7 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var str: List<String>
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,17 +47,36 @@ class DashboardFragment : Fragment() {
             resultLauncher.launch(intent)
         }
 
+        val ntou: ImageView = binding.NTOU
+        ntou.setOnClickListener{
+            openBrowser(ntou)
+        }
+
         //傳送資料
         val complete: Button = binding.complete
         complete.setOnClickListener{
+            val text: TextView = binding.csvText
+            if(text.text == "") return@setOnClickListener
             val bundle = Bundle().apply{
-                val text: TextView = binding.csvText
                 putStringArray("data", str.toTypedArray())
             }
             findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home,bundle)
         }
 
         return root
+    }
+
+    private fun openBrowser(view: View) {
+
+        //Get url from tag
+        val url = view.tag as String
+        val intent = Intent()
+        intent.setAction(Intent.ACTION_VIEW)
+        intent.addCategory(Intent.CATEGORY_BROWSABLE)
+
+        //pass the url to intent data
+        intent.setData(Uri.parse(url))
+        startActivity(intent)
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,9 +91,6 @@ class DashboardFragment : Fragment() {
                     val content = ArrayList<String>()
                     str = readCSV(uri)//.joinToString(separator = "\n")
                     text.text = str[0]
-                }
-                else{
-                    text.text = "無效"
                 }
             }
         }

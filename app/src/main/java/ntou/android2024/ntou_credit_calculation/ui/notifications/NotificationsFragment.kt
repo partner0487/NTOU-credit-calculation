@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentNotificationsBinding
@@ -135,12 +134,6 @@ class NotificationsFragment : Fragment()  {
             pdfDocument.writeTo(FileOutputStream(filePath))
             pdfDocument.close()
 
-        }
-
-        val back: Button = binding.back
-        back.setOnClickListener{
-            //這裡
-            findNavController().popBackStack()
         }
 
         return root

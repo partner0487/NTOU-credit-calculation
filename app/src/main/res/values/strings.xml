@@ -50,6 +50,9 @@
     <string name="elective">選修課程</string>
     <string name="elective_name">選修課程名稱</string>
     <string name="complete">確認</string>
-    <string name="textview">TextView</string>
+    <string name="choose_csv">選擇csv檔</string>
+    <string name="csv_hint">可以去教學務系統下載\
+                            歷屆成績的CSV喔！→</string>
+    <string name="ntou">NTOU</string>
 
 </resources>
