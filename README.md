@@ -3,6 +3,9 @@
 ## 首頁
 <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/home.jpg" width="50%">
 
+## 首頁
+<img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv.png" width="50%">
+
 ## 後端
 首要：可以生成PDF檔
 次要：可以讀取CSV檔 並填入對應格子
