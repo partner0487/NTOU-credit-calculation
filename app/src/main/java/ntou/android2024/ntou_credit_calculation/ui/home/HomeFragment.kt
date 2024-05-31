@@ -88,9 +88,37 @@ class HomeFragment : Fragment() {
         outputPdf.setOnClickListener {
             //傳送資料
             val bundle = Bundle().apply {
-                val test: CheckBox = binding.chinese1
-                putBoolean("test", test.isChecked)
-                putString("test2", test.text.toString())
+                putString("name", binding.name.text.toString())
+                putString("id", binding.numberId.text.toString())
+                putBoolean("ch1", binding.chinese1.isChecked)
+                putBoolean("ch2", binding.chinese2.isChecked)
+                putBoolean("en1", binding.english1.isChecked)
+                putBoolean("en2", binding.english2.isChecked)
+                putBoolean("en3", binding.english3.isChecked)
+                putBoolean("oc", binding.ocean.isChecked)
+                putBoolean("ai", binding.AI.isChecked)
+                putBoolean("cl1", binding.clean1.isChecked)
+                putBoolean("cl2", binding.clean2.isChecked)
+                putBoolean("phy", binding.physic.isChecked)
+                putBoolean("pc", binding.computers.isChecked)
+                putBoolean("cal1", binding.calculus1.isChecked)
+                putBoolean("cal2", binding.calculus2.isChecked)
+                putBoolean("prg", binding.programming.isChecked)
+                putBoolean("ds", binding.dataStructure.isChecked)
+                putBoolean("dis", binding.discrete.isChecked)
+                putBoolean("alr", binding.algorithm.isChecked)
+                putBoolean("digl", binding.digitalLogic.isChecked)
+                putBoolean("digle", binding.digitalLogicExp.isChecked)
+                putBoolean("prg2", binding.programming2.isChecked)
+                putBoolean("ch", binding.computationalHistology.isChecked)
+                putBoolean("la", binding.linearAlgebra.isChecked)
+                putBoolean("prb", binding.probability.isChecked)
+                putBoolean("os", binding.os.isChecked)
+                putBoolean("net", binding.network.isChecked)
+                putBoolean("prd", binding.projectDiscussion.isChecked)
+                putBoolean("pr1", binding.project1.isChecked)
+                putBoolean("pr2", binding.project2.isChecked)
+
             }
             findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_notifications,

@@ -1,4 +1,4 @@
-package ntou.android2024.ntou_credit_calculation.ui.home
+package ntou.android2024.ntou_credit_calculation.ui.notifications
 
 import android.view.LayoutInflater
 import android.view.View
