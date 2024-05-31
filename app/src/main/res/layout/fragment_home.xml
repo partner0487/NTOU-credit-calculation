@@ -14,7 +14,7 @@
         tools:context=".ui.home.HomeFragment">
 
         <EditText
-            android:id="@+id/text_name"
+            android:id="@+id/name"
             android:layout_width="160dp"
             android:layout_height="48dp"
             android:layout_marginStart="24dp"
@@ -39,7 +39,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck" />
+            tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,TextFields" />
 
         <TextView
             android:id="@+id/chinese"
@@ -51,7 +51,7 @@
             android:text="@string/chinese"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
             tools:ignore="MissingConstraints" />
 
         <CheckBox
@@ -788,14 +788,37 @@
             app:layout_constraintTop_toBottomOf="@+id/elective" />
 
         <Button
-            android:id="@+id/output_pdf"
+            android:id="@+id/output_pdf_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="@string/output_pdf"
+            android:text="@string/title_pdf"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_elective" />
+
+        <Button
+            android:id="@+id/output_pdf2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#009688"
+            android:text="@string/title_csv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/output_pdf_home" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/output_pdf2"
+            app:layout_constraintTop_toBottomOf="@+id/output_pdf_home" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

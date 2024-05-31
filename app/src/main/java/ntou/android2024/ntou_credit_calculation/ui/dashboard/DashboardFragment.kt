@@ -12,7 +12,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentDashboardBinding
+
 
 class DashboardFragment : Fragment() {
 
@@ -37,15 +40,24 @@ class DashboardFragment : Fragment() {
             resultLauncher.launch(intent)
         }
 
+        //傳送資料
+        val complete: Button = binding.complete
+        complete.setOnClickListener{
+            val bundle = Bundle().apply{
+                val text: TextView = binding.csvText
+                putString("data", text.text.toString())
+            }
+            findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home,bundle)
+        }
+
         return root
     }
 
     @SuppressLint("SetTextI18n")
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val text: TextView = binding.textDashboard
+            val text: TextView = binding.csvText
             val data: Intent? = result.data
-
             if (data != null) {
                 val uri: Uri? = data.data
                 if(uri != null){
@@ -62,4 +74,5 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

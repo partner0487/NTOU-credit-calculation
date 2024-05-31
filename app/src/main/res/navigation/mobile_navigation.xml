@@ -9,17 +9,45 @@
         android:id="@+id/navigation_home"
         android:name="ntou.android2024.ntou_credit_calculation.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_notifications"
+            app:destination="@id/navigation_notifications">
+            <argument
+                android:name="test"
+                android:defaultValue="false" />
+        </action>
+        <argument
+            android:name="data"
+            app:argType="string"
+            android:defaultValue="csv" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="ntou.android2024.ntou_credit_calculation.ui.dashboard.DashboardFragment"
         android:label="@string/title_csv"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_home"
+            app:destination="@id/navigation_home" >
+            <argument
+                android:name="data"
+                android:defaultValue="data" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="ntou.android2024.ntou_credit_calculation.ui.notifications.NotificationsFragment"
         android:label="@string/title_pdf"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <argument
+            android:name="test"
+            app:argType="boolean" />
+        <argument
+            android:name="test2"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

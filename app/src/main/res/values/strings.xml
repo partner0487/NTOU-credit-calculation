@@ -49,6 +49,7 @@
     <string name="core_elective_name">核心選修課程名稱</string>
     <string name="elective">選修課程</string>
     <string name="elective_name">選修課程名稱</string>
-    <string name="output_pdf">導出PDF</string>
+    <string name="complete">確認</string>
+    <string name="textview">TextView</string>
 
 </resources>

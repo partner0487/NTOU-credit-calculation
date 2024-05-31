@@ -2,12 +2,7 @@ package ntou.android2024.ntou_credit_calculation.ui.home
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.pdf.PdfDocument
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +14,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentHomeBinding
-import java.io.File
-import java.io.FileOutputStream
 
 class HomeFragment : Fragment() {
 
@@ -49,9 +41,8 @@ class HomeFragment : Fragment() {
         val deleteCoreElective: Button = binding.deleteCoreElective
         val addElective: Button = binding.addElective
         val deleteElective: Button = binding.deleteElective
-        val outputPdf: Button = binding.outputPdf
-        val textName = binding.textName
-        val numberId = binding.numberId
+        val outputPdf: Button = binding.outputPdfHome
+        val inputCsv: Button = binding.outputPdf2
 
         val r: Resources = resources
         var coreElectiveNum = 0
@@ -92,101 +83,28 @@ class HomeFragment : Fragment() {
                 deleteClass(electiveNum, r, layout, top)
             }
         }
-        outputPdf.setOnClickListener{
-            //這裡
-            val subjectList = mutableListOf(
-                subject("國文領域(一)", binding.chinese1.isChecked, 2),
-                subject("國文領域(二)", binding.chinese2.isChecked, 2),
-                subject("大一英文(上)", binding.english1.isChecked, 2),
-                subject("大一英文(下)", binding.english2.isChecked, 2),
-                subject("進階英文", binding.english3.isChecked, 2),
-                subject("海洋科學概論", binding.ocean.isChecked, 2),
-                subject("人工智慧概論", binding.AI.isChecked, 2),
-                subject("服務學習 愛校服務(一)", binding.clean1.isChecked, 0),
-                subject("服務學習 愛校服務(二)", binding.clean2.isChecked, 0),
-                subject("普通物理", binding.physic.isChecked, 3),
-                subject("計算機概論", binding.computers.isChecked, 3),
-                subject("微積分(上)", binding.calculus1.isChecked, 3),
-                subject("微積分(下)", binding.calculus2.isChecked, 3),
-                subject("程式設計", binding.programming.isChecked, 3),
-                subject("資料結構", binding.dataStructure.isChecked, 3),
-                subject("離散數學", binding.discrete.isChecked, 3),
-                subject("演算法", binding.algorithm.isChecked, 3),
-                subject("數位邏輯", binding.digitalLogic.isChecked, 3),
-                subject("數位邏輯實驗", binding.digitalLogicExp.isChecked, 3),
-                subject("程式設計(二)", binding.programming2.isChecked, 3),
-                subject("計算機組織學", binding.computationalHistology.isChecked, 3),
-                subject("線性代數", binding.linearAlgebra.isChecked, 3),
-                subject("機率論", binding.probability.isChecked, 3),
-                subject("作業系統", binding.os.isChecked, 3),
-                subject("電腦網路", binding.network.isChecked, 3),
-                subject("資訊專題討論", binding.projectDiscussion.isChecked, 3),
-                subject("資工系專題(一)", binding.project1.isChecked, 3),
-                subject("資工系專題(二)", binding.project2.isChecked, 3)
+
+        //傳送資料
+        outputPdf.setOnClickListener {
+            //傳送資料
+            val bundle = Bundle().apply {
+                val test: CheckBox = binding.chinese1
+                putBoolean("test", test.isChecked)
+                putString("test2", test.text.toString())
+            }
+            findNavController().navigate(
+                R.id.action_navigation_home_to_navigation_notifications,
+                bundle
             )
-
-            val name = textName.text
-            val studentId = numberId.text
-
-            var totalCredit = 0;
-            val it = subjectList.iterator()
-            while(it.hasNext()){
-                val now = it.next()
-                if(now.pass)
-                    totalCredit += now.credit
-                else
-                    it.remove()
-            }
-            val pdfDetails = PdfDetails(name.toString(), studentId.toString(), totalCredit, subjectList)
-
-            val inflater = LayoutInflater.from(context)
-            val view = inflater.inflate(R.layout.pdf_layout, null)
-
-            val studentName = view.findViewById<TextView>(R.id.txt_student_name)
-            val studentID = view.findViewById<TextView>(R.id.txt_studentId)
-            val credit = view.findViewById<TextView>(R.id.txt_total_credit)
-            val recyclerView = view.findViewById<RecyclerView>(R.id.pdf_marks)
-
-            val adapter = MarksRecyclerAdapter(pdfDetails.subjectList)     //Object for the recycler view adapter class
-
-            /*Assign values to each view using the data in PDFDetails*/
-            studentName.text = pdfDetails.Name
-            studentID.text = pdfDetails.studentId
-            credit.text = pdfDetails.totalCredit.toString()
-            recyclerView.adapter = adapter
-
-            val displayMetrics = DisplayMetrics()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                context?.display?.getRealMetrics(displayMetrics)
-                displayMetrics.densityDpi
-            }
-            else{
-                activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-            }
-            view.measure(
-                View.MeasureSpec.makeMeasureSpec(
-                    displayMetrics.widthPixels, View.MeasureSpec.EXACTLY
-                ),
-                View.MeasureSpec.makeMeasureSpec(
-                    displayMetrics.heightPixels, View.MeasureSpec.EXACTLY
-                )
-            )
-
-            view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
-            val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            view.draw(canvas)
-            Bitmap.createScaledBitmap(bitmap, 2100, 2970, true)
-            val pdfDocument = PdfDocument()
-            val pageInfo = PdfDocument.PageInfo.Builder(1050, 1485, 1).create()
-            val page = pdfDocument.startPage(pageInfo)
-            page.canvas.drawBitmap(bitmap, 0F, 0F, null)
-            pdfDocument.finishPage(page)
-            val filePath = File(context?.getExternalFilesDir(null), "report.pdf")
-            pdfDocument.writeTo(FileOutputStream(filePath))
-            pdfDocument.close()
         }
-        
+
+        //接收資料
+        inputCsv.setOnClickListener {
+            val data = arguments?.getString("data")
+            val text: TextView = binding.textView
+            text.text = data
+        }
+
         return root
     }
 
