@@ -3,7 +3,7 @@
 ## 首頁
 <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/home.jpg" width="50%">
 
-## 首頁
+## 成功導入CSV檔畫面
 <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv.png" width="50%">
 
 ## 後端
