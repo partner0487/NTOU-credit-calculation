@@ -34,6 +34,7 @@ class NotificationsFragment : Fragment() {
         val outputPdf: Button = binding.outputPdf
         outputPdf.setOnClickListener{
             //這裡
+            textView.text = "bruh"
         }
 
         return root
