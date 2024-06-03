@@ -737,9 +737,10 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="#2196F3"
             android:text="@string/add"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/core_elective"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
         <Button
             android:id="@+id/delete_core_elective"
@@ -749,6 +750,7 @@
             android:layout_marginEnd="98dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="@string/delete"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/core_elective"
             tools:ignore="DuplicateSpeakableTextCheck" />
@@ -774,8 +776,10 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="#2196F3"
             android:text="@string/add"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/elective" />
+            app:layout_constraintTop_toBottomOf="@+id/elective"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/delete_elective"
@@ -785,6 +789,7 @@
             android:layout_marginEnd="96dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="@string/delete"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/elective" />
 
@@ -795,19 +800,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/title_pdf"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_elective" />
-
-        <Button
-            android:id="@+id/output_pdf2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#009688"
-            android:text="@string/title_csv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/output_pdf_home" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

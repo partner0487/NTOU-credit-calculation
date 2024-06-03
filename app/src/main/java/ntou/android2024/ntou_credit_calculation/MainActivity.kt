@@ -1,6 +1,7 @@
 package ntou.android2024.ntou_credit_calculation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -31,6 +32,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navView.setupWithNavController(navController)
+
+        val pdf:View = findViewById(R.id.navigation_notifications)
+        pdf.setOnClickListener{
+            navController.navigate(R.id.navigation_notifications)
+        }
+        val home:View = findViewById(R.id.navigation_home)
+        home.setOnClickListener{
+            navController.navigate(R.id.navigation_home)
+        }
+        val dashboard:View = findViewById(R.id.navigation_dashboard)
+        dashboard.setOnClickListener{
+            navController.navigate(R.id.navigation_dashboard)
+        }
     }
 
 }

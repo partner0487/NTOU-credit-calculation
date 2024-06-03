@@ -29,7 +29,9 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="35dp"
+        android:backgroundTint="#3F51B5"
         android:text="@string/choose_csv"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/complete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/csv_text" />
@@ -43,9 +45,11 @@
         android:layout_marginEnd="100dp"
         android:backgroundTint="#009688"
         android:text="@string/complete"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/test"
-        app:layout_constraintTop_toBottomOf="@+id/csv_text" />
+        app:layout_constraintTop_toBottomOf="@+id/csv_text"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/NTOU"

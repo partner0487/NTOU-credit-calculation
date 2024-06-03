@@ -23,7 +23,6 @@ import ntou.android2024.ntou_credit_calculation.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -33,7 +32,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        
+        val data = arguments?.getStringArray("data")
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val layout: ConstraintLayout = binding.layout
@@ -43,7 +42,6 @@ class HomeFragment : Fragment() {
         val addElective: Button = binding.addElective
         val deleteElective: Button = binding.deleteElective
         val outputPdf: Button = binding.outputPdfHome
-        val inputCsv: Button = binding.outputPdf2
 
         val r: Resources = resources
         var coreElectiveNum = 0
@@ -174,9 +172,7 @@ class HomeFragment : Fragment() {
         }
 
         //接收資料
-        inputCsv.setOnClickListener {
-            val data = arguments?.getStringArray("data") ?: return@setOnClickListener
-
+        if(data != null){
             val dataSize = data.size - 1
 
             val name = data[0].split(' ')[9].split('-')[1]
