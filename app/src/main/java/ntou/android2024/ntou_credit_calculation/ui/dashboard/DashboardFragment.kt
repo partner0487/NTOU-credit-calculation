@@ -61,6 +61,9 @@ class DashboardFragment : Fragment() {
                 putStringArray("data", str.toTypedArray())
             }
             findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home,bundle)
+
+            //val fragment = HomeFragment()
+            //fragment.arguments = bundle
         }
 
         return root

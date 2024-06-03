@@ -1,6 +1,7 @@
 package ntou.android2024.ntou_credit_calculation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -8,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ntou.android2024.ntou_credit_calculation.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        navView.setupWithNavController(navController)
-        navController.navigate(R.id.navigation_home)
+        navView.setupWithNavController(navController, )
+
+        val home: View = findViewById(R.id.navigation_home)
+        val btn: View = findViewById(R.id.navigation_dashboard)
     }
+
 }

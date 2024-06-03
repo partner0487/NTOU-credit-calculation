@@ -3,20 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_notifications">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="ntou.android2024.ntou_credit_calculation.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
-        <argument
-            android:name="data"
-            app:argType="string[]" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_notifications"
-            app:destination="@id/navigation_notifications" />
-    </fragment>
+    app:startDestination="@+id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -25,11 +12,22 @@
         tools:layout="@layout/fragment_dashboard" >
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_home"
-            app:destination="@id/navigation_home" >
-            <argument
-                android:name="data"
-                android:defaultValue="data" />
+            app:destination="@id/mobile_navigation">
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="ntou.android2024.ntou_credit_calculation.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_notifications"
+            app:destination="@id/mobile_navigation"
+            app:launchSingleTop="false" />
+        <argument
+            android:name="data"
+            app:argType="string[]" />
     </fragment>
 
     <fragment
@@ -43,12 +41,6 @@
         <argument
             android:name="test2"
             app:argType="string" />
-        <action
-            android:id="@+id/action_navigation_notifications_to_navigation_home"
-            app:destination="@id/navigation_home" />
-        <action
-            android:id="@+id/action_navigation_notifications_to_navigation_home2"
-            app:destination="@id/navigation_home" />
     </fragment>
 
 

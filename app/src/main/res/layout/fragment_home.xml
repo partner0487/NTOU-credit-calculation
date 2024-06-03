@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -384,11 +385,11 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/sport2_text1"
+            app:layout_constraintEnd_toStartOf="@+id/sport2_text"
             app:layout_constraintTop_toBottomOf="@+id/sport" />
 
         <EditText
-            android:id="@+id/sport2_text1"
+            android:id="@+id/sport2_text"
             android:layout_width="130dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
@@ -429,12 +430,12 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/sport4_text1"
+            app:layout_constraintEnd_toStartOf="@+id/sport4_text"
             app:layout_constraintTop_toBottomOf="@+id/sport2"
             tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <EditText
-            android:id="@+id/sport4_text1"
+            android:id="@+id/sport4_text"
             android:layout_width="130dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
@@ -445,7 +446,7 @@
             android:inputType="text"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport2_text1"
+            app:layout_constraintTop_toBottomOf="@+id/sport2_text"
             tools:ignore="DuplicateSpeakableTextCheck" />
 
         <CheckBox
@@ -806,17 +807,6 @@
             android:backgroundTint="#009688"
             android:text="@string/title_csv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/output_pdf_home" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/output_pdf2"
             app:layout_constraintTop_toBottomOf="@+id/output_pdf_home" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
