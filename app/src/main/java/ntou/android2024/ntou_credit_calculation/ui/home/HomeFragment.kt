@@ -1,7 +1,7 @@
 package ntou.android2024.ntou_credit_calculation.ui.home
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
@@ -32,7 +32,26 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val data = arguments?.getStringArray("data")
+        val arguments = arguments?.getStringArray("data")
+
+        //讀檔
+        var txt: Array<String> = emptyArray()
+        try {
+            val inputStream = requireActivity().openFileInput("save.txt")
+            val bytes = ByteArray(inputStream.available())
+            val sb = StringBuffer()
+            while (inputStream.read(bytes) != -1) {
+                sb.append(String(bytes))
+            }
+            txt = sb.split(";").toTypedArray()
+            if(txt.size > 1) txt = txt.copyOfRange(0,txt.size-1)
+            inputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val data: Array<String> = arguments ?: txt //emptyArray()
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val layout: ConstraintLayout = binding.layout
@@ -130,6 +149,22 @@ class HomeFragment : Fragment() {
             }
         }
 
+        //存檔
+        val save: Button = binding.save
+        save.setOnClickListener{
+            try {
+                val outputStream = requireActivity().openFileOutput("save.txt", Context.MODE_PRIVATE)
+                if (arguments != null) {
+                    for(element in arguments){
+                        outputStream.write(("$element;").toByteArray())
+                    }
+                }
+                outputStream.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
         //傳送資料
         outputPdf.setOnClickListener {
             //傳送資料
@@ -172,7 +207,7 @@ class HomeFragment : Fragment() {
         }
 
         //接收資料
-        if(data != null){
+        if(data.isNotEmpty()) {
             val dataSize = data.size - 1
 
             val name = data[0].split(' ')[9].split('-')[1]
@@ -190,6 +225,7 @@ class HomeFragment : Fragment() {
             var clean = 0
             var general = 0
             var project = 1
+            var total = 0
             for (i in 2..dataSize) {
                 val dataArray = data[i].replace("\"", "").split(",=")
                 val credit = dataArray[3]
@@ -197,86 +233,73 @@ class HomeFragment : Fragment() {
                 val className = dataArray[5]
                 val score = dataArray[11]
 
-                if(type == "必修"){
-                    if(className.contains("游泳")){ //游泳
-                        binding.swim.isChecked = true
-                    }
-                    else if(credit == "0" && sportNum<=3){ //一般體育
+                if (type == "必修") {
+                    if (className.contains("游泳")) { //游泳
                         sportTextClass[sportNum].setText(className)
                         sportClass[sportNum].isChecked = true
                         sportNum++
-                    }
-                    else{ //必修
+                        binding.swim.isChecked = true
+                    } else if (credit == "0" && sportNum <= 3) { //一般體育
+                        sportTextClass[sportNum].setText(className)
+                        sportClass[sportNum].isChecked = true
+                        sportNum++
+                    } else { //必修
                         val requiredSize = requiredClass.size - 1
                         for (j in 0..requiredSize) {
-                            if(className == requiredClass[j].text){
+                            if (className == requiredClass[j].text) {
                                 requiredClass[j].isChecked = true
                                 break
-                            }
-                            else if(className == "微積分"){ //微積分
+                            } else if (className == "微積分") { //微積分
                                 calculusClass[calculus].isChecked = true
                                 calculus++
                                 break
-                            }
-                            else if(className.contains("國文領域")){ //國文
+                            } else if (className.contains("國文領域")) { //國文
                                 chineseClass[chinese].isChecked = true
                                 chinese++
                                 break
-                            }
-                            else if(className.contains("大一英文")){ //英文
+                            } else if (className.contains("大一英文")) { //英文
                                 englishClass[english].isChecked = true
                                 english++
                                 break
                             }
                         }
                     }
-                }
-                else if(type == "服務學習" && clean<=2){ //服務學習
+                } else if (type == "服務學習" && clean <= 2) { //服務學習
                     cleanClass[clean].isChecked = true
                     clean++
-                }
-                else if((className.contains("英")) && (type == "選修")){ //服務學習
+                } else if ((className.contains("英")) && (type == "選修")) { //服務學習
                     binding.english3.isChecked = true
-                }
-                else if(type == "通識" && general<=6){ //服務學習
+                } else if (type == "通識" && general <= 6) { //服務學習
                     generalTextClass[general].setText(className)
                     generalClass[general].isChecked = true
                     general++
-                }
-                else if(className.contains("資工系專題") && project<=2){ //服務學習
+                } else if (className.contains("資工系專題") && project <= 2) { //服務學習
                     val projectID = requiredClass.size - project
                     requiredClass[projectID].isChecked = true
                     project++
-                }
-                else if((type == "通識") || (type == "選修")){ //服務學習
+                } else if ((type == "通識") || (type == "選修")) { //服務學習
                     val coreSize = coreClass.size - 1
                     var notCore = true
                     for (j in 0..coreSize) {
-                        if(className == coreClass[j]){
-                            coreElectiveNum+=2
+                        if (className == coreClass[j]) {
+                            coreElectiveNum += 2
                             val top = R.id.core_elective
                             addClass(coreElectiveNum, r, layout, className, top, true)
                             notCore = false
                             break
                         }
                     }
-                    if(notCore){
-                        electiveNum+=2
+                    if (notCore) {
+                        electiveNum += 2
                         val top = R.id.elective
                         addClass(electiveNum, r, layout, className, top, true)
                     }
                 }
             }
-            val scrollview = binding.homeScrollview
-            val objectAnimator = ObjectAnimator.ofInt(scrollview, "scrollY",  0).setDuration(
-                1000
-            )
-            objectAnimator.start()
         }
 
         return root
     }
-
 
     //新增課程function
     private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean){

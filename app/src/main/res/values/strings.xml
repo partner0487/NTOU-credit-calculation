@@ -54,5 +54,6 @@
     <string name="csv_hint">可以去教學務系統下載\
                             歷屆成績的CSV喔！→</string>
     <string name="ntou">NTOU</string>
+    <string name="save">存檔</string>
 
 </resources>
