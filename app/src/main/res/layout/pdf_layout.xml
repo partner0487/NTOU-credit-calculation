@@ -11,13 +11,13 @@
         style="@style/Base.Widget.MaterialComponents.TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
-        android:text="學分報告"
-        android:textAlignment="center"
+        android:text=" 學分報告"
+        android:textAlignment="textStart"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

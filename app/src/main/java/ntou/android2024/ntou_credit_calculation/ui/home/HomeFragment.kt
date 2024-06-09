@@ -197,34 +197,27 @@ class HomeFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("name", binding.name.text.toString())
                 putString("id", binding.numberId.text.toString())
-                putBoolean("ch1", binding.chinese1.isChecked)
-                putBoolean("ch2", binding.chinese2.isChecked)
-                putBoolean("en1", binding.english1.isChecked)
-                putBoolean("en2", binding.english2.isChecked)
-                putBoolean("en3", binding.english3.isChecked)
-                putBoolean("oc", binding.ocean.isChecked)
-                putBoolean("ai", binding.AI.isChecked)
-                putBoolean("cl1", binding.clean1.isChecked)
-                putBoolean("cl2", binding.clean2.isChecked)
-                putBoolean("phy", binding.physic.isChecked)
-                putBoolean("pc", binding.computers.isChecked)
-                putBoolean("cal1", binding.calculus1.isChecked)
-                putBoolean("cal2", binding.calculus2.isChecked)
-                putBoolean("prg", binding.programming.isChecked)
-                putBoolean("ds", binding.dataStructure.isChecked)
-                putBoolean("dis", binding.discrete.isChecked)
-                putBoolean("alr", binding.algorithm.isChecked)
-                putBoolean("digl", binding.digitalLogic.isChecked)
-                putBoolean("digle", binding.digitalLogicExp.isChecked)
-                putBoolean("prg2", binding.programming2.isChecked)
-                putBoolean("ch", binding.computationalHistology.isChecked)
-                putBoolean("la", binding.linearAlgebra.isChecked)
-                putBoolean("prb", binding.probability.isChecked)
-                putBoolean("os", binding.os.isChecked)
-                putBoolean("net", binding.network.isChecked)
-                putBoolean("prd", binding.projectDiscussion.isChecked)
-                putBoolean("pr1", binding.project1.isChecked)
-                putBoolean("pr2", binding.project2.isChecked)
+
+                var subNameList = ArrayList<String>()
+                var creditList = ArrayList<String>()
+                for(i in 0 .. binding.layout.childCount){
+                    var child = binding.layout.getChildAt(i)
+                    if(child is CheckBox){
+                        if(child.isChecked){
+                            var nxt = binding.layout.getChildAt(i + 1)
+                            if(nxt is EditText){
+                                subNameList.add(nxt.text.toString())
+                                creditList.add(nxt.tag.toString())
+                            }
+                            else{
+                                subNameList.add(child.text.toString())
+                                creditList.add(child.tag.toString())
+                            }
+                        }
+                    }
+                }
+                putStringArrayList("subName", subNameList)
+                putStringArrayList("credit", creditList)
             }
             findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_notifications,
@@ -354,6 +347,7 @@ class HomeFragment : Fragment() {
         dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
         dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
         dynamicTextview.hint = resources.getString(R.string.core_elective_name)
+        dynamicTextview.tag = "0"
         dynamicTextview.setText(className)
         if(num>=4000) dynamicTextview.hint = resources.getString(R.string.elective_name)
         dynamicTextview.textSize = 14F

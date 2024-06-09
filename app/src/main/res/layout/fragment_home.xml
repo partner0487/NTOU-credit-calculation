@@ -65,6 +65,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/chinese1"
+            android:tag="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chinese"
             tools:ignore="MissingConstraints" />
@@ -76,6 +77,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/chinese2"
+            android:tag="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chinese"
             tools:ignore="MissingConstraints" />
@@ -100,6 +102,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/english1"
+            android:tag="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/english"
             tools:ignore="MissingConstraints" />
@@ -111,6 +114,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/english2"
+            android:tag="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/english"
             tools:ignore="MissingConstraints" />
@@ -122,6 +126,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/english3"
+            android:tag="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/english1"
             tools:ignore="MissingConstraints" />
@@ -133,6 +138,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/english4"
+            android:tag="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/english2"
             tools:ignore="MissingConstraints" />
@@ -157,6 +163,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/ocean"
+            android:tag="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/general"
             tools:ignore="MissingConstraints" />
@@ -168,6 +175,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/AI"
+            android:tag="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/general"
             tools:ignore="MissingConstraints" />
@@ -191,6 +199,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/general1"
             app:layout_constraintTop_toBottomOf="@+id/ocean"
@@ -215,6 +224,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/AI"
@@ -239,6 +249,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/general3"
             app:layout_constraintTop_toBottomOf="@+id/general1_text"
@@ -263,6 +274,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/general2_text"
@@ -287,6 +299,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/general5"
             app:layout_constraintTop_toBottomOf="@+id/general3_text" />
@@ -310,6 +323,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/general4_text"
@@ -334,6 +348,7 @@
             android:ems="10"
             android:hint="@string/general_input"
             android:inputType="text"
+            android:tag="2"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/general7"
             app:layout_constraintTop_toBottomOf="@+id/general5_text" />
@@ -375,6 +390,7 @@
             android:ems="10"
             android:hint="@string/sport_input"
             android:inputType="text"
+            android:tag="0"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/sport1"
             app:layout_constraintTop_toBottomOf="@+id/sport"
@@ -398,6 +414,7 @@
             android:ems="10"
             android:hint="@string/sport_input"
             android:inputType="text"
+            android:tag="0"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sport" />
@@ -421,6 +438,7 @@
             android:ems="10"
             android:hint="@string/sport_input"
             android:inputType="text"
+            android:tag="0"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/sport3"
             app:layout_constraintTop_toBottomOf="@+id/sport1_text" />
@@ -444,6 +462,7 @@
             android:ems="10"
             android:hint="@string/sport_input"
             android:inputType="text"
+            android:tag="0"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sport2_text"
@@ -456,6 +475,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/swim"
+            android:tag="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sport3"
             tools:ignore="DuplicateSpeakableTextCheck" />
@@ -481,6 +501,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/clean1"
+            android:tag="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clean"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -492,6 +513,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/clean2"
+            android:tag="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clean"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -515,6 +537,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/physic"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/required"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -526,6 +549,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/computers"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/required"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -537,6 +561,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/calculus1"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/physic"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -548,6 +573,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/calculus2"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/computers"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -559,6 +585,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/programming"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calculus1"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -570,6 +597,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/data_structure"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calculus2"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -581,6 +609,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/discrete"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/programming"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -592,6 +621,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/algorithm"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/data_structure"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -603,6 +633,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/digital_logic"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/discrete"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -614,6 +645,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/digital_logic_exp"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/algorithm"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -625,6 +657,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/programming2"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/digital_logic"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -636,6 +669,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/computational_histology"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/digital_logic_exp"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -647,6 +681,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/linear_algebra"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/programming2"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -658,6 +693,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/probability"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/computational_histology"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -669,6 +705,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/os"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_algebra"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -680,6 +717,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/network"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/probability"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -691,6 +729,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/project_discussion"
+            android:tag="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/os"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -702,6 +741,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/project1"
+            android:tag="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/network"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
@@ -713,6 +753,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/project2"
+            android:tag="3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/project_discussion"
             tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
