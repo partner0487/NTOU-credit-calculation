@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -60,6 +61,9 @@ class DashboardFragment : Fragment() {
             val bundle = Bundle().apply{
                 putStringArray("data", str.toTypedArray())
             }
+
+            val toast = Toast.makeText(context , "匯入成功", Toast.LENGTH_SHORT)
+            toast.show()
             findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home,bundle)
 
             //val fragment = HomeFragment()

@@ -1,863 +1,861 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_scrollview"
+    android:id="@+id/home_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
+    <ScrollView
+        android:id="@+id/home_scrollview"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="100dp"
+            tools:context=".ui.home.HomeFragment">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="DuplicateIds,LabelFor,MissingConstraints,TouchTargetSizeCheck" />
+
+            <EditText
+                android:id="@+id/number_id"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/id"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,TextFields" />
+
+            <TextView
+                android:id="@+id/chinese"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/chinese"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/chinese1"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:checked="false"
+                android:clickable="true"
+                android:focusable="true"
+                android:tag="2"
+                android:text="@string/chinese1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chinese"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/chinese2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="2"
+                android:text="@string/chinese2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chinese"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/english"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/english"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chinese1"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/english1"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="2"
+                android:text="@string/english1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/english"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/english2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="2"
+                android:text="@string/english2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/english"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/english3"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="2"
+                android:text="@string/english3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/english1"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/english4"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="0"
+                android:text="@string/english4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/english2"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/general"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/general"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/english3"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/ocean"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="2"
+                android:text="@string/ocean"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/AI"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="2"
+                android:text="@string/AI"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/general1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ocean"
+                tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/general1_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/general1"
+                app:layout_constraintTop_toBottomOf="@+id/ocean"
+                tools:ignore="DuplicateClickableBoundsCheck,DuplicateSpeakableTextCheck,MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/general2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/general2_text"
+                app:layout_constraintTop_toBottomOf="@+id/AI"
+                tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/general2_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/AI"
+                tools:ignore="DuplicateClickableBoundsCheck" />
+
+            <CheckBox
+                android:id="@+id/general3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general1"
+                tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/general3_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/general3"
+                app:layout_constraintTop_toBottomOf="@+id/general1_text"
+                tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck" />
+
+            <CheckBox
+                android:id="@+id/general4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/general4_text"
+                app:layout_constraintTop_toBottomOf="@+id/general2"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/general4_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general2_text"
+                tools:ignore="DuplicateClickableBoundsCheck" />
+
+            <CheckBox
+                android:id="@+id/general5"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general3"
+                tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/general5_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/general5"
+                app:layout_constraintTop_toBottomOf="@+id/general3_text" />
+
+            <CheckBox
+                android:id="@+id/general6"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/general6_text"
+                app:layout_constraintTop_toBottomOf="@+id/general4"
+                tools:ignore="MissingConstraints,TextSizeCheck" />
+
+            <EditText
+                android:id="@+id/general6_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general4_text"
+                tools:ignore="DuplicateClickableBoundsCheck" />
+
+            <CheckBox
+                android:id="@+id/general7"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general5"
+                tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/general7_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/general_input"
+                android:inputType="text"
+                android:tag="2"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/general7"
+                app:layout_constraintTop_toBottomOf="@+id/general5_text" />
+
+            <TextView
+                android:id="@+id/sport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/sport"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/general7" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="left" />
+
+            <CheckBox
+                android:id="@+id/sport1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sport"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <EditText
+                android:id="@+id/sport1_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/sport_input"
+                android:inputType="text"
+                android:tag="0"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/sport1"
+                app:layout_constraintTop_toBottomOf="@+id/sport"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <CheckBox
+                android:id="@+id/sport2"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/sport2_text"
+                app:layout_constraintTop_toBottomOf="@+id/sport" />
+
+            <EditText
+                android:id="@+id/sport2_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/sport_input"
+                android:inputType="text"
+                android:tag="0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sport" />
+
+            <CheckBox
+                android:id="@+id/sport3"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sport1"
+                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+
+            <EditText
+                android:id="@+id/sport3_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/sport_input"
+                android:inputType="text"
+                android:tag="0"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/sport3"
+                app:layout_constraintTop_toBottomOf="@+id/sport1_text" />
+
+            <CheckBox
+                android:id="@+id/sport4"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/sport4_text"
+                app:layout_constraintTop_toBottomOf="@+id/sport2"
+                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+
+            <EditText
+                android:id="@+id/sport4_text"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/sport_input"
+                android:inputType="text"
+                android:tag="0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sport2_text"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <CheckBox
+                android:id="@+id/swim"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="0"
+                android:text="@string/swim"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sport3"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/clean"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/clean"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/swim"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/clean1"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="0"
+                android:text="@string/clean1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clean"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/clean2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="0"
+                android:text="@string/clean2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clean"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/required"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/required"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clean1" />
+
+            <CheckBox
+                android:id="@+id/physic"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/physic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/required"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/computers"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/computers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/required"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/calculus1"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/calculus1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/physic"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/calculus2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/calculus2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/computers"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/programming"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/programming"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calculus1"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/data_structure"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/data_structure"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calculus2"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/discrete"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/discrete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/programming"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/algorithm"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/algorithm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/data_structure"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/digital_logic"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/digital_logic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/discrete"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/digital_logic_exp"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/digital_logic_exp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/algorithm"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/programming2"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/programming2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/digital_logic"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/computational_histology"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/computational_histology"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/digital_logic_exp"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/linear_algebra"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/linear_algebra"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/programming2"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/probability"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/probability"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/computational_histology"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/os"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/os"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linear_algebra"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/network"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/network"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/probability"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/project_discussion"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="1"
+                android:text="@string/project_discussion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/os"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/project1"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:tag="3"
+                android:text="@string/project1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/network"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <CheckBox
+                android:id="@+id/project2"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:tag="3"
+                android:text="@string/project2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/project_discussion"
+                tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/core_elective"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/core_elective"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/project2" />
+
+            <Button
+                android:id="@+id/add_core_elective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#2196F3"
+                android:text="@string/add"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/core_elective"
+                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/delete_core_elective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="98dp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/core_elective"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/elective"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/elective"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_core_elective" />
+
+            <Button
+                android:id="@+id/add_elective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#2196F3"
+                android:text="@string/add"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/elective"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/delete_elective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="96dp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/elective" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="100dp"
-        tools:context=".ui.home.HomeFragment">
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/name"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="DuplicateIds,LabelFor,MissingConstraints,TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/number_id"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/id"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,TextFields" />
-
-        <TextView
-            android:id="@+id/chinese"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/chinese"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/chinese1"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:checked="false"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/chinese1"
-            android:tag="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chinese"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/chinese2"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/chinese2"
-            android:tag="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chinese"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/english"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/english"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chinese1"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/english1"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/english1"
-            android:tag="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/english"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/english2"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/english2"
-            android:tag="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/english"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/english3"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/english3"
-            android:tag="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/english1"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/english4"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/english4"
-            android:tag="0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/english2"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/general"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/general"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/english3"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/ocean"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/ocean"
-            android:tag="2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/AI"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/AI"
-            android:tag="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/general1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ocean"
-            tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/general1_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/general1"
-            app:layout_constraintTop_toBottomOf="@+id/ocean"
-            tools:ignore="DuplicateClickableBoundsCheck,DuplicateSpeakableTextCheck,MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/general2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/general2_text"
-            app:layout_constraintTop_toBottomOf="@+id/AI"
-            tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/general2_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AI"
-            tools:ignore="DuplicateClickableBoundsCheck" />
-
-        <CheckBox
-            android:id="@+id/general3"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general1"
-            tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/general3_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/general3"
-            app:layout_constraintTop_toBottomOf="@+id/general1_text"
-            tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck" />
-
-        <CheckBox
-            android:id="@+id/general4"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/general4_text"
-            app:layout_constraintTop_toBottomOf="@+id/general2"
-            tools:ignore="MissingConstraints,TextSizeCheck" />
-
-        <EditText
-            android:id="@+id/general4_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general2_text"
-            tools:ignore="DuplicateClickableBoundsCheck" />
-
-        <CheckBox
-            android:id="@+id/general5"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general3"
-            tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/general5_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/general5"
-            app:layout_constraintTop_toBottomOf="@+id/general3_text" />
-
-        <CheckBox
-            android:id="@+id/general6"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/general6_text"
-            app:layout_constraintTop_toBottomOf="@+id/general4"
-            tools:ignore="MissingConstraints,TextSizeCheck" />
-
-        <EditText
-            android:id="@+id/general6_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general4_text"
-            tools:ignore="DuplicateClickableBoundsCheck" />
-
-        <CheckBox
-            android:id="@+id/general7"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general5"
-            tools:ignore="MissingConstraints,TextSizeCheck,DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/general7_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/general_input"
-            android:inputType="text"
-            android:tag="2"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/general7"
-            app:layout_constraintTop_toBottomOf="@+id/general5_text" />
-
-        <TextView
-            android:id="@+id/sport"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/sport"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general7" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left" />
-
-        <CheckBox
-            android:id="@+id/sport1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <EditText
-            android:id="@+id/sport1_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/sport_input"
-            android:inputType="text"
-            android:tag="0"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/sport1"
-            app:layout_constraintTop_toBottomOf="@+id/sport"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <CheckBox
-            android:id="@+id/sport2"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/sport2_text"
-            app:layout_constraintTop_toBottomOf="@+id/sport" />
-
-        <EditText
-            android:id="@+id/sport2_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/sport_input"
-            android:inputType="text"
-            android:tag="0"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport" />
-
-        <CheckBox
-            android:id="@+id/sport3"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport1"
-            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/sport3_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/sport_input"
-            android:inputType="text"
-            android:tag="0"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/sport3"
-            app:layout_constraintTop_toBottomOf="@+id/sport1_text" />
-
-        <CheckBox
-            android:id="@+id/sport4"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/sport4_text"
-            app:layout_constraintTop_toBottomOf="@+id/sport2"
-            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/sport4_text"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/sport_input"
-            android:inputType="text"
-            android:tag="0"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport2_text"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <CheckBox
-            android:id="@+id/swim"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/swim"
-            android:tag="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sport3"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <TextView
-            android:id="@+id/clean"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/clean"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/swim"
-            tools:ignore="MissingConstraints" />
-
-        <CheckBox
-            android:id="@+id/clean1"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/clean1"
-            android:tag="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clean"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/clean2"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/clean2"
-            android:tag="0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clean"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <TextView
-            android:id="@+id/required"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/required"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clean1" />
-
-        <CheckBox
-            android:id="@+id/physic"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/physic"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/required"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/computers"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/computers"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/required"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/calculus1"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/calculus1"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/physic"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/calculus2"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/calculus2"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/computers"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/programming"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/programming"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calculus1"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/data_structure"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/data_structure"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calculus2"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/discrete"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/discrete"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/programming"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/algorithm"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/algorithm"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/data_structure"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/digital_logic"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/digital_logic"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/discrete"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/digital_logic_exp"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/digital_logic_exp"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/algorithm"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/programming2"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/programming2"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/digital_logic"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/computational_histology"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/computational_histology"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/digital_logic_exp"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/linear_algebra"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/linear_algebra"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/programming2"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/probability"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/probability"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/computational_histology"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/os"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/os"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_algebra"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/network"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/network"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/probability"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/project_discussion"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/project_discussion"
-            android:tag="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/os"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/project1"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/project1"
-            android:tag="3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/network"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <CheckBox
-            android:id="@+id/project2"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/project2"
-            android:tag="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/project_discussion"
-            tools:ignore="DuplicateSpeakableTextCheck,TextSizeCheck" />
-
-        <TextView
-            android:id="@+id/core_elective"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/core_elective"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/project2" />
-
-        <Button
-            android:id="@+id/add_core_elective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#2196F3"
-            android:text="@string/add"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/core_elective"
-            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
-
-        <Button
-            android:id="@+id/delete_core_elective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="98dp"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="@string/delete"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/core_elective"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <TextView
-            android:id="@+id/elective"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/elective"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_core_elective" />
-
-        <Button
-            android:id="@+id/add_elective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#2196F3"
-            android:text="@string/add"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/elective"
-            tools:ignore="TextContrastCheck" />
-
-        <Button
-            android:id="@+id/delete_elective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="96dp"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="@string/delete"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/elective" />
-
-        <Button
-            android:id="@+id/output_pdf_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/title_pdf"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_elective" />
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="96dp"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:text="@string/save"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delete_elective" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/add"
+        android:src="@android:drawable/stat_sys_download_done"
+        app:layout_constraintBottom_toBottomOf="@+id/home_scrollview"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

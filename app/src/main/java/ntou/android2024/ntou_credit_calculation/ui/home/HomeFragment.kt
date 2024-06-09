@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -36,7 +37,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val arguments = arguments?.getStringArray("data")
-
         //讀檔
         var txt: Array<String> = emptyArray()
         try {
@@ -75,7 +75,6 @@ class HomeFragment : Fragment() {
         val deleteCoreElective: Button = binding.deleteCoreElective
         val addElective: Button = binding.addElective
         val deleteElective: Button = binding.deleteElective
-        val outputPdf: Button = binding.outputPdfHome
 
         val r: Resources = resources
         var coreElectiveNum = 0
@@ -134,7 +133,7 @@ class HomeFragment : Fragment() {
         addCoreElective.setOnClickListener {
             coreElectiveNum += 2
             val top = R.id.core_elective
-            addClass(coreElectiveNum, r, layout, "", top, false)
+            addClass(coreElectiveNum, r, layout, "", top, false, "3")
         }
 
         //刪除核心選修
@@ -151,7 +150,7 @@ class HomeFragment : Fragment() {
         addElective.setOnClickListener {
             electiveNum += 2
             val top = R.id.elective
-            addClass(electiveNum, r, layout, "", top, false)
+            addClass(electiveNum, r, layout, "", top, false, "3")
         }
 
         //刪除選修
@@ -165,7 +164,7 @@ class HomeFragment : Fragment() {
         }
 
         //存檔
-        val save: Button = binding.save
+        val save: ImageButton = binding.save
         save.setOnClickListener {
             try {
                 val filePath = "save.txt"
@@ -176,6 +175,37 @@ class HomeFragment : Fragment() {
                     }
                 }
                 outputStream.close()
+
+                //傳資料到PDF
+                val bundle = Bundle().apply {
+                    putString("name", binding.name.text.toString())
+                    putString("id", binding.numberId.text.toString())
+
+                    var subNameList = ArrayList<String>()
+                    var creditList = ArrayList<String>()
+                    for(i in 0 .. binding.layout.childCount){
+                        var child = binding.layout.getChildAt(i)
+                        if(child is CheckBox){
+                            if(child.isChecked){
+                                var nxt = binding.layout.getChildAt(i + 1)
+                                if(nxt is EditText){
+                                    subNameList.add(nxt.text.toString())
+                                    creditList.add(nxt.tag.toString())
+                                }
+                                else{
+                                    subNameList.add(child.text.toString())
+                                    creditList.add(child.tag.toString())
+                                }
+                            }
+                        }
+                    }
+                    putStringArrayList("subName", subNameList)
+                    putStringArrayList("credit", creditList)
+                }
+                findNavController().navigate(
+                    R.id.action_navigation_home_to_navigation_notifications,
+                    bundle
+                )
             }
             catch(e: FileNotFoundException) {
                 e.printStackTrace()
@@ -189,40 +219,6 @@ class HomeFragment : Fragment() {
             catch(e:Exception) {
                 e.printStackTrace()
             }
-        }
-
-        //傳送資料
-        outputPdf.setOnClickListener {
-            //傳送資料
-            val bundle = Bundle().apply {
-                putString("name", binding.name.text.toString())
-                putString("id", binding.numberId.text.toString())
-
-                var subNameList = ArrayList<String>()
-                var creditList = ArrayList<String>()
-                for(i in 0 .. binding.layout.childCount){
-                    var child = binding.layout.getChildAt(i)
-                    if(child is CheckBox){
-                        if(child.isChecked){
-                            var nxt = binding.layout.getChildAt(i + 1)
-                            if(nxt is EditText){
-                                subNameList.add(nxt.text.toString())
-                                creditList.add(nxt.tag.toString())
-                            }
-                            else{
-                                subNameList.add(child.text.toString())
-                                creditList.add(child.tag.toString())
-                            }
-                        }
-                    }
-                }
-                putStringArrayList("subName", subNameList)
-                putStringArrayList("credit", creditList)
-            }
-            findNavController().navigate(
-                R.id.action_navigation_home_to_navigation_notifications,
-                bundle
-            )
         }
 
         //接收資料
@@ -303,7 +299,7 @@ class HomeFragment : Fragment() {
                         if (className == coreClass[j]) {
                             coreElectiveNum += 2
                             val top = R.id.core_elective
-                            addClass(coreElectiveNum, r, layout, className, top, true)
+                            addClass(coreElectiveNum, r, layout, className, top, true, credit)
                             notCore = false
                             break
                         }
@@ -311,7 +307,7 @@ class HomeFragment : Fragment() {
                     if (notCore) {
                         electiveNum += 2
                         val top = R.id.elective
-                        addClass(electiveNum, r, layout, className, top, true)
+                        addClass(electiveNum, r, layout, className, top, true, credit)
                     }
                 }
             }
@@ -321,7 +317,7 @@ class HomeFragment : Fragment() {
     }
 
     //新增課程function
-    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean){
+    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean, credit:String){
 
         var start = 0
         var addId = R.id.add_core_elective
@@ -347,7 +343,7 @@ class HomeFragment : Fragment() {
         dynamicTextview.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130F ,r.displayMetrics).toInt()
         dynamicTextview.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48F ,r.displayMetrics).toInt()
         dynamicTextview.hint = resources.getString(R.string.core_elective_name)
-        dynamicTextview.tag = "0"
+        dynamicTextview.tag = credit
         dynamicTextview.setText(className)
         if(num>=4000) dynamicTextview.hint = resources.getString(R.string.elective_name)
         dynamicTextview.textSize = 14F
