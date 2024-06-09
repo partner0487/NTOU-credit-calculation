@@ -817,4 +817,6 @@
             app:layout_constraintTop_toBottomOf="@+id/delete_elective" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
+

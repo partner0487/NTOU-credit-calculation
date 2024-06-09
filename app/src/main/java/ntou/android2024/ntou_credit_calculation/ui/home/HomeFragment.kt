@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentHomeBinding
+import java.io.FileNotFoundException
+import java.io.IOException
 
 
 class HomeFragment : Fragment() {
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +43,25 @@ class HomeFragment : Fragment() {
             val inputStream = requireActivity().openFileInput("save.txt")
             val bytes = ByteArray(inputStream.available())
             val sb = StringBuffer()
-            while (inputStream.read(bytes) != -1) {
+            while (inputStream.read(bytes) != -1 && inputStream.read(bytes) != 0) {
                 sb.append(String(bytes))
             }
-            txt = sb.split(";").toTypedArray()
-            if(txt.size > 1) txt = txt.copyOfRange(0,txt.size-1)
-            inputStream.close()
-        } catch (e: Exception) {
+            if (sb.length > 1){
+                txt = sb.split(";").toTypedArray()
+                if (txt.size > 1) txt = txt.copyOfRange(0, txt.size - 1)
+                inputStream.close()
+            }
+        }
+        catch(e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+        catch(e:NumberFormatException) {
+            e.printStackTrace()
+        }
+        catch(e: IOException) {
+            e.printStackTrace()
+        }
+        catch(e:Exception) {
             e.printStackTrace()
         }
 
@@ -110,23 +125,23 @@ class HomeFragment : Fragment() {
             binding.sport3Text, binding.sport4Text,
         )
         val coreClass = arrayOf(
-            "數位系統","微處理器原理與組合語言","計算機系統設計","計算機結構","嵌入式系統設計",
-            "JAVA程式設計","程式語言","資料庫系統","編譯器","系統程式","軟體工程",
-            "機器學習技術","人工智慧","資訊安全導論"
+            "數位系統", "微處理器原理與組合語言", "計算機系統設計", "計算機結構", "嵌入式系統設計",
+            "JAVA程式設計", "程式語言", "資料庫系統", "編譯器", "系統程式", "軟體工程",
+            "機器學習技術", "人工智慧", "資訊安全導論"
         )
 
         //新增核心選修
         addCoreElective.setOnClickListener {
-            coreElectiveNum+=2
+            coreElectiveNum += 2
             val top = R.id.core_elective
             addClass(coreElectiveNum, r, layout, "", top, false)
         }
 
         //刪除核心選修
         deleteCoreElective.setOnClickListener {
-            if(coreElectiveNum == 0) return@setOnClickListener
+            if (coreElectiveNum == 0) return@setOnClickListener
             else {
-                coreElectiveNum-=2
+                coreElectiveNum -= 2
                 val top = R.id.core_elective
                 deleteClass(coreElectiveNum, r, layout, top)
             }
@@ -134,16 +149,16 @@ class HomeFragment : Fragment() {
 
         //新增選修
         addElective.setOnClickListener {
-            electiveNum+=2
+            electiveNum += 2
             val top = R.id.elective
             addClass(electiveNum, r, layout, "", top, false)
         }
 
         //刪除選修
         deleteElective.setOnClickListener {
-            if(electiveNum == 4000) return@setOnClickListener
+            if (electiveNum == 4000) return@setOnClickListener
             else {
-                electiveNum-=2
+                electiveNum -= 2
                 val top = R.id.elective
                 deleteClass(electiveNum, r, layout, top)
             }
@@ -151,16 +166,27 @@ class HomeFragment : Fragment() {
 
         //存檔
         val save: Button = binding.save
-        save.setOnClickListener{
+        save.setOnClickListener {
             try {
-                val outputStream = requireActivity().openFileOutput("save.txt", Context.MODE_PRIVATE)
+                val filePath = "save.txt"
+                val outputStream = requireActivity().openFileOutput(filePath, Context.MODE_PRIVATE)
                 if (arguments != null) {
-                    for(element in arguments){
+                    for (element in arguments) {
                         outputStream.write(("$element;").toByteArray())
                     }
                 }
                 outputStream.close()
-            } catch (e: Exception) {
+            }
+            catch(e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+            catch(e:NumberFormatException) {
+                e.printStackTrace()
+            }
+            catch(e: IOException) {
+                e.printStackTrace()
+            }
+            catch(e:Exception) {
                 e.printStackTrace()
             }
         }
@@ -207,7 +233,7 @@ class HomeFragment : Fragment() {
         }
 
         //接收資料
-        if(data.isNotEmpty()) {
+        if (data.isNotEmpty()) {
             val dataSize = data.size - 1
 
             val name = data[0].split(' ')[9].split('-')[1]
@@ -233,8 +259,8 @@ class HomeFragment : Fragment() {
                 val className = dataArray[5]
                 val score = dataArray[11]
 
-                if (type == "必修") {
-                    if (className.contains("游泳")) { //游泳
+                if (type == "必修" || type == "抵") {
+                    if (className.contains("游泳") && !binding.swim.isChecked) { //游泳
                         sportTextClass[sportNum].setText(className)
                         sportClass[sportNum].isChecked = true
                         sportNum++
