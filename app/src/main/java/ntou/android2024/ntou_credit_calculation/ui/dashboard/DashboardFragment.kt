@@ -58,6 +58,11 @@ class DashboardFragment : Fragment() {
         complete.setOnClickListener{
             val text: TextView = binding.csvText
             if(text.text == "") return@setOnClickListener
+            else if(!text.text.contains("資訊工程學系")) {
+                val toast = Toast.makeText(context , "目前只限海大資工的學生喔", Toast.LENGTH_SHORT)
+                toast.show()
+                return@setOnClickListener
+            }
             val bundle = Bundle().apply{
                 putStringArray("data", str.toTypedArray())
             }
@@ -95,8 +100,7 @@ class DashboardFragment : Fragment() {
                 val uri: Uri? = data.data
                 if(uri != null){
                     text.textSize = 20F
-                    val content = ArrayList<String>()
-                    str = readCSV(uri)//.joinToString(separator = "\n")
+                    str = readCSV(uri)
                     text.text = str[0]
                 }
             }

@@ -54,18 +54,8 @@
     <string name="csv_hint">可以去教學務系統下載\
                             歷屆成績的CSV喔！→</string>
     <string name="ntou">NTOU</string>
+    <string name="pdf">PDF</string>
     <string name="save">存檔</string>
-    <string-array name="credit">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-    </string-array>
+    <string name="total">" 總學分："</string>
 
 </resources>

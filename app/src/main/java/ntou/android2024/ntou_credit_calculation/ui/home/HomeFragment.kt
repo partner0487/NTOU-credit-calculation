@@ -37,6 +37,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val arguments = arguments?.getStringArray("data")
+
+        var totalCredit = 0
+
         //讀檔
         var txt: Array<String> = emptyArray()
         try {
@@ -65,7 +68,7 @@ class HomeFragment : Fragment() {
             e.printStackTrace()
         }
 
-        val data: Array<String> = arguments ?: txt //emptyArray()
+        var data: Array<String> = arguments ?: txt //emptyArray()
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -128,12 +131,15 @@ class HomeFragment : Fragment() {
             "JAVA程式設計", "程式語言", "資料庫系統", "編譯器", "系統程式", "軟體工程",
             "機器學習技術", "人工智慧", "資訊安全導論"
         )
+        val total = binding.total
 
         //新增核心選修
         addCoreElective.setOnClickListener {
             coreElectiveNum += 2
             val top = R.id.core_elective
             addClass(coreElectiveNum, r, layout, "", top, false, "3")
+            totalCredit += ("3").toInt() - ("0").toInt()
+            total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
 
         //刪除核心選修
@@ -143,6 +149,8 @@ class HomeFragment : Fragment() {
                 coreElectiveNum -= 2
                 val top = R.id.core_elective
                 deleteClass(coreElectiveNum, r, layout, top)
+                totalCredit -= ("3").toInt() - ("0").toInt()
+                total.text = resources.getString(R.string.total) + totalCredit.toString()
             }
         }
 
@@ -151,6 +159,8 @@ class HomeFragment : Fragment() {
             electiveNum += 2
             val top = R.id.elective
             addClass(electiveNum, r, layout, "", top, false, "3")
+            totalCredit += ("3").toInt() - ("0").toInt()
+            total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
 
         //刪除選修
@@ -160,6 +170,8 @@ class HomeFragment : Fragment() {
                 electiveNum -= 2
                 val top = R.id.elective
                 deleteClass(electiveNum, r, layout, top)
+                totalCredit -= ("3").toInt() - ("0").toInt()
+                total.text = resources.getString(R.string.total) + totalCredit.toString()
             }
         }
 
@@ -169,10 +181,8 @@ class HomeFragment : Fragment() {
             try {
                 val filePath = "save.txt"
                 val outputStream = requireActivity().openFileOutput(filePath, Context.MODE_PRIVATE)
-                if (arguments != null) {
-                    for (element in arguments) {
-                        outputStream.write(("$element;").toByteArray())
-                    }
+                for (element in data) {
+                    outputStream.write(("$element;").toByteArray())
                 }
                 outputStream.close()
 
@@ -180,14 +190,13 @@ class HomeFragment : Fragment() {
                 val bundle = Bundle().apply {
                     putString("name", binding.name.text.toString())
                     putString("id", binding.numberId.text.toString())
-
-                    var subNameList = ArrayList<String>()
-                    var creditList = ArrayList<String>()
+                    val subNameList = ArrayList<String>()
+                    val creditList = ArrayList<String>()
                     for(i in 0 .. binding.layout.childCount){
-                        var child = binding.layout.getChildAt(i)
+                        val child = binding.layout.getChildAt(i)
                         if(child is CheckBox){
                             if(child.isChecked){
-                                var nxt = binding.layout.getChildAt(i + 1)
+                                val nxt = binding.layout.getChildAt(i + 1)
                                 if(nxt is EditText){
                                     subNameList.add(nxt.text.toString())
                                     creditList.add(nxt.tag.toString())
@@ -240,77 +249,81 @@ class HomeFragment : Fragment() {
             var clean = 0
             var general = 0
             var project = 1
-            var total = 0
             for (i in 2..dataSize) {
                 val dataArray = data[i].replace("\"", "").split(",=")
                 val credit = dataArray[3]
                 val type = dataArray[4]
                 val className = dataArray[5]
                 val score = dataArray[11]
-
-                if (type == "必修" || type == "抵") {
-                    if (className.contains("游泳") && !binding.swim.isChecked) { //游泳
-                        sportTextClass[sportNum].setText(className)
-                        sportClass[sportNum].isChecked = true
-                        sportNum++
-                        binding.swim.isChecked = true
-                    } else if (credit == "0" && sportNum <= 3) { //一般體育
-                        sportTextClass[sportNum].setText(className)
-                        sportClass[sportNum].isChecked = true
-                        sportNum++
-                    } else { //必修
-                        val requiredSize = requiredClass.size - 1
-                        for (j in 0..requiredSize) {
-                            if (className == requiredClass[j].text) {
-                                requiredClass[j].isChecked = true
-                                break
-                            } else if (className == "微積分") { //微積分
-                                calculusClass[calculus].isChecked = true
-                                calculus++
-                                break
-                            } else if (className.contains("國文領域")) { //國文
-                                chineseClass[chinese].isChecked = true
-                                chinese++
-                                break
-                            } else if (className.contains("大一英文")) { //英文
-                                englishClass[english].isChecked = true
-                                english++
+                if(!score.contains("*") && !score.contains("W") && score!=""){
+                    if (type == "必修" || type == "抵") {
+                        if (className.contains("游泳") && !binding.swim.isChecked) { //游泳
+                            sportTextClass[sportNum].setText(className)
+                            sportClass[sportNum].isChecked = true
+                            sportNum++
+                            binding.swim.isChecked = true
+                        } else if (credit == "0" && sportNum <= 3) { //一般體育
+                            sportTextClass[sportNum].setText(className)
+                            sportClass[sportNum].isChecked = true
+                            sportNum++
+                        } else { //必修
+                            val requiredSize = requiredClass.size - 1
+                            for (j in 0..requiredSize) {
+                                if (className == requiredClass[j].text) {
+                                    requiredClass[j].isChecked = true
+                                    break
+                                } else if (className == "微積分") { //微積分
+                                    calculusClass[calculus].isChecked = true
+                                    calculus++
+                                    break
+                                } else if (className.contains("國文領域")) { //國文
+                                    chineseClass[chinese].isChecked = true
+                                    chinese++
+                                    break
+                                } else if (className.contains("大一英文")) { //英文
+                                    englishClass[english].isChecked = true
+                                    english++
+                                    break
+                                }
+                            }
+                        }
+                    } else if (type == "服務學習" && clean <= 2) { //服務學習
+                        cleanClass[clean].isChecked = true
+                        clean++
+                    } else if ((className.contains("英")) && (type == "選修")) { //服務學習
+                        binding.english3.isChecked = true
+                    } else if (type == "通識" && general <= 6) { //服務學習
+                        generalTextClass[general].setText(className)
+                        generalClass[general].isChecked = true
+                        general++
+                    } else if (className.contains("資工系專題") && project <= 2) { //服務學習
+                        val projectID = requiredClass.size - project
+                        requiredClass[projectID].isChecked = true
+                        project++
+                    } else if ((type == "通識") || (type == "選修")) { //服務學習
+                        val coreSize = coreClass.size - 1
+                        var notCore = true
+                        for (j in 0..coreSize) {
+                            if (className == coreClass[j]) {
+                                coreElectiveNum += 2
+                                val top = R.id.core_elective
+                                addClass(coreElectiveNum, r, layout, className, top, true, credit)
+                                notCore = false
                                 break
                             }
                         }
-                    }
-                } else if (type == "服務學習" && clean <= 2) { //服務學習
-                    cleanClass[clean].isChecked = true
-                    clean++
-                } else if ((className.contains("英")) && (type == "選修")) { //服務學習
-                    binding.english3.isChecked = true
-                } else if (type == "通識" && general <= 6) { //服務學習
-                    generalTextClass[general].setText(className)
-                    generalClass[general].isChecked = true
-                    general++
-                } else if (className.contains("資工系專題") && project <= 2) { //服務學習
-                    val projectID = requiredClass.size - project
-                    requiredClass[projectID].isChecked = true
-                    project++
-                } else if ((type == "通識") || (type == "選修")) { //服務學習
-                    val coreSize = coreClass.size - 1
-                    var notCore = true
-                    for (j in 0..coreSize) {
-                        if (className == coreClass[j]) {
-                            coreElectiveNum += 2
-                            val top = R.id.core_elective
-                            addClass(coreElectiveNum, r, layout, className, top, true, credit)
-                            notCore = false
-                            break
+                        if (notCore) {
+                            electiveNum += 2
+                            val top = R.id.elective
+                            addClass(electiveNum, r, layout, className, top, true, credit)
                         }
                     }
-                    if (notCore) {
-                        electiveNum += 2
-                        val top = R.id.elective
-                        addClass(electiveNum, r, layout, className, top, true, credit)
+                    if (credit != "") {
+                        totalCredit += credit.toInt() - ("0").toInt()
                     }
                 }
             }
+            total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
 
         return root

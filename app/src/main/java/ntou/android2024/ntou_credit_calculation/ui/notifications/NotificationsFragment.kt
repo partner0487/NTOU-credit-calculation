@@ -11,7 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import ntou.android2024.ntou_credit_calculation.R
@@ -36,13 +38,19 @@ class NotificationsFragment : Fragment()  {
 
         val root: View = binding.root
 
+        val pdf: ImageView = binding.pdf
+        pdf.setOnClickListener{
+            val toast = Toast.makeText(context , "還沒匯出喔", Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
         val outputPdf: Button = binding.outputPdf
         outputPdf.setOnClickListener{
             //這裡
-            var NameList = arguments?.getStringArrayList("subName")
-            var CreditList = arguments?.getStringArrayList("credit")
+            val NameList = arguments?.getStringArrayList("subName")
+            val CreditList = arguments?.getStringArrayList("credit")
 
-            var subjectList = mutableListOf<subject>()
+            val subjectList = mutableListOf<subject>()
 
             if (NameList != null && CreditList != null) {
                 for(i in 0 until NameList.size){
@@ -113,6 +121,8 @@ class NotificationsFragment : Fragment()  {
             val filePath = File(context?.getExternalFilesDir(null), "report.pdf")
             pdfDocument.writeTo(FileOutputStream(filePath))
             pdfDocument.close()
+            val toast = Toast.makeText(context , "匯出成功", Toast.LENGTH_SHORT)
+            toast.show()
         }
         return root
     }
