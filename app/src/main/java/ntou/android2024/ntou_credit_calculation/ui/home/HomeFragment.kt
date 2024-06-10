@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
             e.printStackTrace()
         }
 
-        var data: Array<String> = arguments ?: txt //emptyArray()
+        val data: Array<String> = arguments ?: txt //emptyArray()
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
             binding.sport1, binding.sport2,
             binding.sport3, binding.sport4,
         )
-        val sportTextClass = arrayOf<EditText>(
+        val sportTextClass = arrayOf(
             binding.sport1Text, binding.sport2Text,
             binding.sport3Text, binding.sport4Text,
         )
@@ -363,10 +363,10 @@ class HomeFragment : Fragment() {
         layout.addView(dynamicTextview)
 
         ConstraintSet().apply {
-            clone(layout);
+            clone(layout)
             if(num % 4 == 2){
                 if(num == start+2){
-                    connect(dynamicCheckBox.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
+                    connect(dynamicCheckBox.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop)
                     connect(dynamicTextview.id, ConstraintSet.TOP, top, ConstraintSet.BOTTOM, marginTop);
                 }
                 else{
