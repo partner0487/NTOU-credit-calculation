@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">NTOU-credit-calculation</string>
+    <string name="app_name">海大學分計算機</string>
     <string name="title_home">首頁</string>
     <string name="title_pdf" tools:ignore="ExtraTranslation">導出PDF</string>
     <string name="title_csv" tools:ignore="ExtraTranslation">導入CSV</string>
