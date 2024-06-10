@@ -38,7 +38,7 @@ class NotificationsFragment : Fragment()  {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,7 +48,10 @@ class NotificationsFragment : Fragment()  {
 
         val root: View = binding.root
 
+        val loading = binding.loading
+
         val pdf: ImageView = binding.pdf
+        pdf.visibility = View.GONE
         pdf.setOnClickListener{
             val toast = Toast.makeText(context , "還沒匯出喔", Toast.LENGTH_SHORT)
             toast.show()
@@ -66,34 +69,29 @@ class NotificationsFragment : Fragment()  {
 
                 val subjectList = mutableListOf<subject>()
 
-                if (NameList != null && CreditList != null) {
-                    for (i in 0 until NameList.size) {
-                        subjectList.add(subject(NameList.get(i), CreditList.get(i).toInt()))
-                    }
+            if (nameList != null && creditList != null) {
+                for(i in 0 until nameList.size){
+                    subjectList.add(subject(nameList[i], creditList[i].toInt()))
                 }
-                val chunkedList = subjectList.chunked(12)
+            }
+            val chunkedList = subjectList.chunked(12)
 
                 val name = arguments?.getString("name")
                 val studentId = arguments?.getString("id")
 
-                var totalCredit = 0;
-                val it = subjectList.iterator()
-                while (it.hasNext()) {
-                    val now = it.next()
-                    totalCredit += now.credit
-                }
-                val pdfDocument = PdfDocument()
-                var i = 0;
-                while (i < chunkedList.size) {
-                    val pdfDetails = PdfDetails(
-                        name.toString(),
-                        studentId.toString(),
-                        totalCredit,
-                        chunkedList.get(i)
-                    )
+            var totalCredit = 0;
+            val iterator = subjectList.iterator()
+            while(iterator.hasNext()) {
+                val now = iterator.next()
+                totalCredit += now.credit
+            }
+            val pdfDocument = PdfDocument()
+            var i = 0;
+            while(i < chunkedList.size){
+                val pdfDetails = PdfDetails(name.toString(), studentId.toString(), totalCredit, chunkedList.get(i))
 
-                    val inflater = LayoutInflater.from(context)
-                    val view = inflater.inflate(R.layout.pdf_layout, null)
+                val inf = LayoutInflater.from(context)
+                val view = inf.inflate(R.layout.pdf_layout, null)
 
                     val studentName = view.findViewById<TextView>(R.id.txt_student_name)
                     val studentID = view.findViewById<TextView>(R.id.txt_studentId)
@@ -139,17 +137,17 @@ class NotificationsFragment : Fragment()  {
                     page.canvas.drawBitmap(bitmap, 0F, 0F, null)
                     pdfDocument.finishPage(page)
 
-                    i += 1
-                }
-                val filePath = File(
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                    "report.pdf"
-                )
-                pdfDocument.writeTo(FileOutputStream(filePath))
-                pdfDocument.close()
-                val toast = Toast.makeText(context, "匯出成功", Toast.LENGTH_SHORT)
-                toast.show()
+                i += 1
             }
+            val filePath = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "report.pdf")
+            pdfDocument.writeTo(FileOutputStream(filePath))
+            pdfDocument.close()
+            pdf.visibility = View.VISIBLE
+            loading.visibility = View.GONE
+            val gotoPdf = binding.gotoPdf
+            gotoPdf.text = "點擊開啟PDF"
+            val toast = Toast.makeText(context , "匯出成功", Toast.LENGTH_SHORT)
+            toast.show()
         }
         return root
     }
