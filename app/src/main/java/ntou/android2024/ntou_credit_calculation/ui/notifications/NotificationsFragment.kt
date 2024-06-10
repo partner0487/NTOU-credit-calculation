@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -118,7 +119,7 @@ class NotificationsFragment : Fragment()  {
 
                 i += 1
             }
-            val filePath = File(context?.getExternalFilesDir(null), "report.pdf")
+            val filePath = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "report.pdf")
             pdfDocument.writeTo(FileOutputStream(filePath))
             pdfDocument.close()
             val toast = Toast.makeText(context , "匯出成功", Toast.LENGTH_SHORT)
