@@ -26,14 +26,15 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-class NotificationsFragment : Fragment()  {
+class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 
     private val binding get() = _binding!!
     val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()){
-        if(!it){
+        ActivityResultContracts.RequestPermission()
+    ) {
+        if (!it) {
             Toast.makeText(requireContext(), "你必須打開權限", Toast.LENGTH_LONG).show()
         }
     }
@@ -52,46 +53,54 @@ class NotificationsFragment : Fragment()  {
 
         val pdf: ImageView = binding.pdf
         pdf.visibility = View.GONE
-        pdf.setOnClickListener{
-            val toast = Toast.makeText(context , "還沒匯出喔", Toast.LENGTH_SHORT)
+        pdf.setOnClickListener {
+            val toast = Toast.makeText(context, "還沒匯出喔", Toast.LENGTH_SHORT)
             toast.show()
         }
 
         val outputPdf: Button = binding.outputPdf
-        outputPdf.setOnClickListener{
+        outputPdf.setOnClickListener {
             //這裡
-            if(ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-            else {
+            } else {
                 val NameList = arguments?.getStringArrayList("subName")
                 val CreditList = arguments?.getStringArrayList("credit")
 
                 val subjectList = mutableListOf<subject>()
 
-            if (nameList != null && creditList != null) {
-                for(i in 0 until nameList.size){
-                    subjectList.add(subject(nameList[i], creditList[i].toInt()))
+                if (NameList != null && CreditList != null) {
+                    for (i in 0 until NameList.size) {
+                        subjectList.add(subject(NameList[i], CreditList[i].toInt()))
+                    }
                 }
-            }
-            val chunkedList = subjectList.chunked(12)
+                val chunkedList = subjectList.chunked(12)
 
                 val name = arguments?.getString("name")
                 val studentId = arguments?.getString("id")
 
-            var totalCredit = 0;
-            val iterator = subjectList.iterator()
-            while(iterator.hasNext()) {
-                val now = iterator.next()
-                totalCredit += now.credit
-            }
-            val pdfDocument = PdfDocument()
-            var i = 0;
-            while(i < chunkedList.size){
-                val pdfDetails = PdfDetails(name.toString(), studentId.toString(), totalCredit, chunkedList.get(i))
+                var totalCredit = 0;
+                val iterator = subjectList.iterator()
+                while (iterator.hasNext()) {
+                    val now = iterator.next()
+                    totalCredit += now.credit
+                }
+                val pdfDocument = PdfDocument()
+                var i = 0;
+                while (i < chunkedList.size) {
+                    val pdfDetails = PdfDetails(
+                        name.toString(),
+                        studentId.toString(),
+                        totalCredit,
+                        chunkedList.get(i)
+                    )
 
-                val inf = LayoutInflater.from(context)
-                val view = inf.inflate(R.layout.pdf_layout, null)
+                    val inf = LayoutInflater.from(context)
+                    val view = inf.inflate(R.layout.pdf_layout, null)
 
                     val studentName = view.findViewById<TextView>(R.id.txt_student_name)
                     val studentID = view.findViewById<TextView>(R.id.txt_studentId)
@@ -137,17 +146,22 @@ class NotificationsFragment : Fragment()  {
                     page.canvas.drawBitmap(bitmap, 0F, 0F, null)
                     pdfDocument.finishPage(page)
 
-                i += 1
+                    i += 1
+                }
+                val filePath = File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    "report.pdf"
+                )
+                pdfDocument.writeTo(FileOutputStream(filePath))
+                pdfDocument.close()
+                pdf.visibility = View.VISIBLE
+                loading.visibility = View.GONE
+                val gotoPdf = binding.gotoPdf
+                gotoPdf.text = "點擊開啟PDF"
+                val toast = Toast.makeText(context, "匯出成功", Toast.LENGTH_SHORT)
+                toast.show()
             }
-            val filePath = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "report.pdf")
-            pdfDocument.writeTo(FileOutputStream(filePath))
-            pdfDocument.close()
-            pdf.visibility = View.VISIBLE
-            loading.visibility = View.GONE
-            val gotoPdf = binding.gotoPdf
-            gotoPdf.text = "點擊開啟PDF"
-            val toast = Toast.makeText(context , "匯出成功", Toast.LENGTH_SHORT)
-            toast.show()
+
         }
         return root
     }
