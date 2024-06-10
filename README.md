@@ -1,4 +1,4 @@
-# 海大資工 學分計算機
+# 海大資工 學分計算機 <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/logo.png">
 
 ## 前端
 | 首頁                                                                                            | 成功導入CSV檔畫面  |
