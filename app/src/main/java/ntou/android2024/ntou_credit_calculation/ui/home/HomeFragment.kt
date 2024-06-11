@@ -30,6 +30,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var totalCredit = 0
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,8 +39,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val arguments = arguments?.getStringArray("data")
-
-        var totalCredit = 0
 
         //讀檔
         var txt: Array<String> = emptyArray()
@@ -137,7 +137,7 @@ class HomeFragment : Fragment() {
         addCoreElective.setOnClickListener {
             coreElectiveNum += 2
             val top = R.id.core_elective
-            addClass(coreElectiveNum, r, layout, "", top, false, "3")
+            addClass(coreElectiveNum, r, layout, "", top, false, "3", total)
             totalCredit += ("3").toInt() - ("0").toInt()
             total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
@@ -158,7 +158,7 @@ class HomeFragment : Fragment() {
         addElective.setOnClickListener {
             electiveNum += 2
             val top = R.id.elective
-            addClass(electiveNum, r, layout, "", top, false, "3")
+            addClass(electiveNum, r, layout, "", top, false, "3", total)
             totalCredit += ("3").toInt() - ("0").toInt()
             total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
@@ -175,13 +175,65 @@ class HomeFragment : Fragment() {
             }
         }
 
+        for(i in 0 .. binding.layout.childCount){
+            val child = binding.layout.getChildAt(i)
+            if(child is CheckBox){
+                child.setOnClickListener{
+                    if(!child.isChecked){
+                        val nxt = binding.layout.getChildAt(i + 1)
+                        if(nxt is EditText){
+                            totalCredit -= nxt.tag.toString().toInt() - ("0").toInt()
+                            total.text = resources.getString(R.string.total) + totalCredit.toString()
+                        }
+                        else{
+                            totalCredit -= child.tag.toString().toInt() - ("0").toInt()
+                            total.text = resources.getString(R.string.total) + totalCredit.toString()
+                        }
+                    }
+                    else{
+                        val nxt = binding.layout.getChildAt(i + 1)
+                        if(nxt is EditText){
+                            totalCredit += nxt.tag.toString().toInt() - ("0").toInt()
+                            total.text = resources.getString(R.string.total) + totalCredit.toString()
+                        }
+                        else{
+                            totalCredit += child.tag.toString().toInt() - ("0").toInt()
+                            total.text = resources.getString(R.string.total) + totalCredit.toString()
+                        }
+                    }
+                }
+            }
+        }
+
+
         //存檔
         val save: ImageButton = binding.save
         save.setOnClickListener {
             try {
                 val filePath = "save.txt"
                 val outputStream = requireActivity().openFileOutput(filePath, Context.MODE_PRIVATE)
-                for (element in data) {
+
+                var saveData = emptyArray<String>()
+                saveData += data[0].split("學號")[0] + "學號-" + binding.numberId.text.toString() + " 姓名-" + binding.name.text.toString() + "\n"
+                saveData += "學年期,課號,開課班別,學分數,選別,課程名稱,教師姓名,期中評量,期中扣考,期末評量,期末扣考,學期總成績\n"
+                for(i in 0 .. binding.layout.childCount){
+                    val child = binding.layout.getChildAt(i)
+                    if(child is CheckBox){
+                        if(child.isChecked){
+                            val nxt = binding.layout.getChildAt(i + 1)
+                            saveData += if(nxt is EditText){
+                                if(nxt.hint.toString().contains("體育")) "=\"\",=\"\",=\"\",=\"" + nxt.tag.toString() + "\",=\"必修\",=\"" + nxt.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                                else if(nxt.hint.toString().contains("博雅")) "=\"\",=\"\",=\"\",=\"" + nxt.tag.toString() + "\",=\"通識\",=\"" + nxt.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                                else "=\"\",=\"\",=\"\",=\"" + nxt.tag.toString() + "\",=\"選修\",=\"" + nxt.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                            } else{
+                                if(child.text.toString().contains("服務學習")) "=\"\",=\"\",=\"\",=\"" + child.tag.toString() + "\",=\"服務學習\",=\"" + child.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                                else "=\"\",=\"\",=\"\",=\"" + child.tag.toString() + "\",=\"必修\",=\""+ child.text.toString() +"\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                            }
+                        }
+                    }
+                }
+
+                for (element in saveData) {
                     outputStream.write(("$element;").toByteArray())
                 }
                 outputStream.close()
@@ -192,21 +244,14 @@ class HomeFragment : Fragment() {
                     putString("id", binding.numberId.text.toString())
                     val subNameList = ArrayList<String>()
                     val creditList = ArrayList<String>()
-                    for(i in 0 .. binding.layout.childCount){
-                        val child = binding.layout.getChildAt(i)
-                        if(child is CheckBox){
-                            if(child.isChecked){
-                                val nxt = binding.layout.getChildAt(i + 1)
-                                if(nxt is EditText){
-                                    subNameList.add(nxt.text.toString())
-                                    creditList.add(nxt.tag.toString())
-                                }
-                                else{
-                                    subNameList.add(child.text.toString())
-                                    creditList.add(child.tag.toString())
-                                }
-                            }
-                        }
+                    for (i in 2..<saveData.size) {
+                        val dataArray = saveData[i].replace("\"", "").split(",=")
+                        val credit = dataArray[3]
+                        val className = dataArray[5]
+
+                        subNameList.add(className)
+                        creditList.add(credit)
+
                     }
                     putStringArrayList("subName", subNameList)
                     putStringArrayList("credit", creditList)
@@ -307,7 +352,7 @@ class HomeFragment : Fragment() {
                             if (className == coreClass[j]) {
                                 coreElectiveNum += 2
                                 val top = R.id.core_elective
-                                addClass(coreElectiveNum, r, layout, className, top, true, credit)
+                                addClass(coreElectiveNum, r, layout, className, top, true, credit, total)
                                 notCore = false
                                 break
                             }
@@ -315,7 +360,7 @@ class HomeFragment : Fragment() {
                         if (notCore) {
                             electiveNum += 2
                             val top = R.id.elective
-                            addClass(electiveNum, r, layout, className, top, true, credit)
+                            addClass(electiveNum, r, layout, className, top, true, credit, total)
                         }
                     }
                     if (credit != "") {
@@ -330,7 +375,8 @@ class HomeFragment : Fragment() {
     }
 
     //新增課程function
-    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean, credit:String){
+    @SuppressLint("SetTextI18n")
+    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean, credit:String, total:TextView){
 
         var start = 0
         var addId = R.id.add_core_elective
@@ -361,6 +407,17 @@ class HomeFragment : Fragment() {
         if(num>=4000) dynamicTextview.hint = resources.getString(R.string.elective_name)
         dynamicTextview.textSize = 14F
         layout.addView(dynamicTextview)
+
+        dynamicCheckBox.setOnClickListener{
+            if(!dynamicCheckBox.isChecked){
+                totalCredit -= dynamicTextview.tag.toString().toInt() - ("0").toInt()
+                total.text = resources.getString(R.string.total) + totalCredit.toString()
+            }
+            else{
+                totalCredit += dynamicTextview.tag.toString().toInt() - ("0").toInt()
+                total.text = resources.getString(R.string.total) + totalCredit.toString()
+            }
+        }
 
         ConstraintSet().apply {
             clone(layout)
