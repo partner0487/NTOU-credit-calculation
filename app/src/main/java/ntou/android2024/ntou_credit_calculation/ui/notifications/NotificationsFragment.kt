@@ -1,12 +1,15 @@
 package ntou.android2024.ntou_credit_calculation.ui.notifications
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -44,8 +47,7 @@ class NotificationsFragment : Fragment()  {
         val pdf: ImageView = binding.pdf
         pdf.visibility = View.GONE
         pdf.setOnClickListener{
-            val toast = Toast.makeText(context , "還沒匯出喔", Toast.LENGTH_SHORT)
-            toast.show()
+            openFolder()
         }
 
         val outputPdf: Button = binding.outputPdf
@@ -129,11 +131,20 @@ class NotificationsFragment : Fragment()  {
             loading.visibility = View.GONE
             val gotoPdf = binding.gotoPdf
             gotoPdf.text = "點擊開啟PDF"
-            val toast = Toast.makeText(context , "匯出成功", Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(context , "下載完成", Toast.LENGTH_SHORT)
             toast.show()
         }
         return root
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun openFolder() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val selectedUri = Uri.parse(Environment.getExternalStorageDirectory().toString())
+        intent.setDataAndType(selectedUri,  DocumentsContract.Document.MIME_TYPE_DIR)
+        startActivity(intent);
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
