@@ -1,6 +1,7 @@
 package ntou.android2024.ntou_credit_calculation.ui.notifications
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -15,6 +16,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +26,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ntou.android2024.ntou_credit_calculation.R
 import ntou.android2024.ntou_credit_calculation.databinding.FragmentNotificationsBinding
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
+import java.io.IOException
 
 
 class NotificationsFragment : Fragment()  {
@@ -53,8 +58,44 @@ class NotificationsFragment : Fragment()  {
         val outputPdf: Button = binding.outputPdf
         outputPdf.setOnClickListener{
             //這裡
-            val nameList = arguments?.getStringArrayList("subName")
-            val creditList = arguments?.getStringArrayList("credit")
+            var txt: Array<String> = emptyArray()
+            try {
+                val inputStream = requireActivity().openFileInput("save.txt")
+                val bytes = ByteArray(inputStream.available())
+                val sb = StringBuffer()
+                while (inputStream.read(bytes) != -1 && inputStream.read(bytes) != 0) {
+                    sb.append(String(bytes))
+                }
+                if (sb.length > 1){
+                    txt = sb.split(";").toTypedArray()
+                    if (txt.size > 1) txt = txt.copyOfRange(0, txt.size - 1)
+                    inputStream.close()
+                }
+            }
+            catch(e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+            catch(e:NumberFormatException) {
+                e.printStackTrace()
+            }
+            catch(e: IOException) {
+                e.printStackTrace()
+            }
+            catch(e:Exception) {
+                e.printStackTrace()
+            }
+            val nameList = ArrayList<String>()
+            val creditList = ArrayList<String>()
+
+            for (i in 2..< txt.size) {
+                val dataArray = txt[i].replace("\"", "").split(",=")
+                val credit = dataArray[3]
+                val className = dataArray[5]
+
+                nameList.add(className)
+                creditList.add(credit)
+
+            }
 
             val subjectList = mutableListOf<subject>()
 
@@ -65,8 +106,8 @@ class NotificationsFragment : Fragment()  {
             }
             val chunkedList = subjectList.chunked(12)
 
-            val name = arguments?.getString("name")
-            val studentId = arguments?.getString("id")
+            val name = txt[0].split("姓名-")[1]
+            val studentId = txt[0].split("姓名-")[0].split("學號-")[1]
 
             var totalCredit = 0;
             val iterator = subjectList.iterator()
