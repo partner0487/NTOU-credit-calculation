@@ -238,27 +238,8 @@ class HomeFragment : Fragment() {
                 }
                 outputStream.close()
 
-                //傳資料到PDF
-                val bundle = Bundle().apply {
-                    putString("name", binding.name.text.toString())
-                    putString("id", binding.numberId.text.toString())
-                    val subNameList = ArrayList<String>()
-                    val creditList = ArrayList<String>()
-                    for (i in 2..<saveData.size) {
-                        val dataArray = saveData[i].replace("\"", "").split(",=")
-                        val credit = dataArray[3]
-                        val className = dataArray[5]
-
-                        subNameList.add(className)
-                        creditList.add(credit)
-
-                    }
-                    putStringArrayList("subName", subNameList)
-                    putStringArrayList("credit", creditList)
-                }
                 findNavController().navigate(
-                    R.id.action_navigation_home_to_navigation_notifications,
-                    bundle
+                    R.id.action_navigation_home_to_navigation_notifications
                 )
             }
             catch(e: FileNotFoundException) {
