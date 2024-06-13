@@ -227,6 +227,7 @@ class HomeFragment : Fragment() {
                                 else "=\"\",=\"\",=\"\",=\"" + nxt.tag.toString() + "\",=\"選修\",=\"" + nxt.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
                             } else{
                                 if(child.text.toString().contains("服務學習")) "=\"\",=\"\",=\"\",=\"" + child.tag.toString() + "\",=\"服務學習\",=\"" + child.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
+                                else if(child.text.toString().contains("進階英文")) "=\"\",=\"\",=\"\",=\"" + child.tag.toString() + "\",=\"選修\",=\"" + child.text.toString() + "\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
                                 else "=\"\",=\"\",=\"\",=\"" + child.tag.toString() + "\",=\"必修\",=\""+ child.text.toString() +"\",=\"\",=\"\",=\"\",=\"\",=\"\",=\"\"\n"
                             }
                         }
@@ -298,7 +299,7 @@ class HomeFragment : Fragment() {
                                 if (className == requiredClass[j].text) {
                                     requiredClass[j].isChecked = true
                                     break
-                                } else if (className == "微積分") { //微積分
+                                } else if (className.contains("微積分")) { //微積分
                                     calculusClass[calculus].isChecked = true
                                     calculus++
                                     break
