@@ -31,3 +31,6 @@
 | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv_false.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv_true.jpg"> |
 
 ### PDF
+<video controls>
+  <source src="[/media/cc0-videos/flower.webm](https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/demo.mp4" type="video/mp4" />
+</video>
