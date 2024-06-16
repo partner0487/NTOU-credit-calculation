@@ -1,5 +1,6 @@
 # 海大資工 學分計算機 <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/logo.png" width="50"/>
-
+## 環境
+android 13(api version 33)+
 ## UI
 | 導入CSV                                                                                        | 首頁                                                                                            | 導出PDF                                                                                        |
 |----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -31,6 +32,13 @@
 | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv_false.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/csv_true.jpg"> |
 
 ### PDF
+
+確認好首頁的資料以後 點擊首頁的存檔按鈕跳轉到輸出pdf畫面，並點擊導出pdf，點擊pdf的圖示前往檔案，檔案為report.pdf
+
+| 點擊導出pdf前                                                                                           | 點擊後                                                                                    | 輸出結果(report.pdf)                                                                                    |
+|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/before_export.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/after_export.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/report.jpg"> |
+
 
 ## DEMO
 [DEMO影片](image/demo.mp4)
