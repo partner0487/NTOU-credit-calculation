@@ -1,6 +1,7 @@
 package ntou.android2024.ntou_credit_calculation.ui.home
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
@@ -137,9 +138,18 @@ class HomeFragment : Fragment() {
         addCoreElective.setOnClickListener {
             coreElectiveNum += 2
             val top = R.id.core_elective
-            addClass(coreElectiveNum, r, layout, "", top, false, "3", total)
-            totalCredit += ("3").toInt() - ("0").toInt()
-            total.text = resources.getString(R.string.total) + totalCredit.toString()
+            val lunch: List<String> = listOf("1","2","3","4","5","6")
+            var singleChoiceIndex = 0
+            AlertDialog.Builder(context)
+                .setTitle("學分：")
+                .setSingleChoiceItems(lunch.toTypedArray(), singleChoiceIndex) { _, which ->
+                    singleChoiceIndex = which
+                }
+                .setPositiveButton("確認") { dialog, _ ->
+                    addClass(coreElectiveNum, r, layout, "", top, false, lunch[singleChoiceIndex], total)
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         //刪除核心選修
@@ -149,8 +159,6 @@ class HomeFragment : Fragment() {
                 coreElectiveNum -= 2
                 val top = R.id.core_elective
                 deleteClass(coreElectiveNum, r, layout, top)
-                totalCredit -= ("3").toInt() - ("0").toInt()
-                total.text = resources.getString(R.string.total) + totalCredit.toString()
             }
         }
 
@@ -158,9 +166,18 @@ class HomeFragment : Fragment() {
         addElective.setOnClickListener {
             electiveNum += 2
             val top = R.id.elective
-            addClass(electiveNum, r, layout, "", top, false, "3", total)
-            totalCredit += ("3").toInt() - ("0").toInt()
-            total.text = resources.getString(R.string.total) + totalCredit.toString()
+            val lunch: List<String> = listOf("1","2","3","4","5","6")
+            var singleChoiceIndex = 0
+            AlertDialog.Builder(context)
+                .setTitle("學分：")
+                .setSingleChoiceItems(lunch.toTypedArray(), singleChoiceIndex) { _, which ->
+                    singleChoiceIndex = which
+                }
+                .setPositiveButton("確認") { dialog, _ ->
+                    addClass(electiveNum, r, layout, "", top, false, lunch[singleChoiceIndex], total)
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         //刪除選修
@@ -170,8 +187,6 @@ class HomeFragment : Fragment() {
                 electiveNum -= 2
                 val top = R.id.elective
                 deleteClass(electiveNum, r, layout, top)
-                totalCredit -= ("3").toInt() - ("0").toInt()
-                total.text = resources.getString(R.string.total) + totalCredit.toString()
             }
         }
 
@@ -205,6 +220,38 @@ class HomeFragment : Fragment() {
             }
         }
 
+        //清空
+        val trash: ImageButton = binding.trash
+        trash.setOnClickListener {
+            AlertDialog.Builder(context).setMessage("確定要清空資料嗎")
+                .setTitle("清空資料")
+                .setPositiveButton("確定"){ _, _ ->
+                    try {
+                        val filePath = "save.txt"
+                        val outputStream = requireActivity().openFileOutput(filePath, Context.MODE_PRIVATE)
+                        outputStream.write(("").toByteArray())
+                        outputStream.close()
+
+                        findNavController().navigate(
+                            R.id.navigation_home
+                        )
+                    }
+                    catch(e: FileNotFoundException) {
+                        e.printStackTrace()
+                    }
+                    catch(e:NumberFormatException) {
+                        e.printStackTrace()
+                    }
+                    catch(e: IOException) {
+                        e.printStackTrace()
+                    }
+                    catch(e:Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                .setNeutralButton("取消", null)
+                .show()
+        }
 
         //存檔
         val save: ImageButton = binding.save
@@ -214,7 +261,7 @@ class HomeFragment : Fragment() {
                 val outputStream = requireActivity().openFileOutput(filePath, Context.MODE_PRIVATE)
 
                 var saveData = emptyArray<String>()
-                saveData += data[0].split("學號")[0] + "學號-" + binding.numberId.text.toString() + " 姓名-" + binding.name.text.toString() + "\n"
+                saveData += "程式代碼：GRD5010, 查詢條件 學制-日間學制 部別-大學部 學院-電機資訊學院 系所-資訊工程學系 年級-3 班級-A " + "學號-" + binding.numberId.text.toString() + " 姓名-" + binding.name.text.toString() + "\n"
                 saveData += "學年期,課號,開課班別,學分數,選別,課程名稱,教師姓名,期中評量,期中扣考,期末評量,期末扣考,學期總成績\n"
                 for(i in 0 .. binding.layout.childCount){
                     val child = binding.layout.getChildAt(i)
@@ -352,13 +399,16 @@ class HomeFragment : Fragment() {
             }
             total.text = resources.getString(R.string.total) + totalCredit.toString()
         }
+        else{
+            total.text = resources.getString(R.string.total) + "0"
+        }
 
         return root
     }
 
     //新增課程function
     @SuppressLint("SetTextI18n")
-    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean, credit:String, total:TextView){
+    private fun addClass(num :Int, r: Resources, layout: ConstraintLayout, className:String, top:Int, tf:Boolean, credit:String, total:TextView) {
 
         var start = 0
         var addId = R.id.add_core_elective
@@ -439,6 +489,7 @@ class HomeFragment : Fragment() {
     }
 
     //刪除課程function
+    @SuppressLint("SetTextI18n")
     private fun deleteClass(num :Int, r: Resources, layout: ConstraintLayout, top:Int){
         var start = 0
         var addId = R.id.add_core_elective
@@ -451,8 +502,15 @@ class HomeFragment : Fragment() {
 
         val marginTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F ,r.displayMetrics).toInt()
         val nowText:TextView = requireView().findViewById(num+2)
+        val nowCheck:CheckBox = requireView().findViewById(num+1)
+
+        if(nowCheck.isChecked){
+            val total = binding.total
+            totalCredit -= nowText.tag.toString().toInt() - ("0").toInt()
+            total.text = resources.getString(R.string.total) + totalCredit.toString()
+        }
+
         layout.removeView(nowText);
-        val nowCheck:TextView = requireView().findViewById(num+1)
         layout.removeView(nowCheck);
         ConstraintSet().apply {
             clone(layout)
