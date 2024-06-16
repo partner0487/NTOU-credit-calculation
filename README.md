@@ -35,9 +35,9 @@ android 13(api version 33)+
 
 確認好首頁的資料以後 點擊首頁的存檔按鈕跳轉到輸出pdf畫面，並點擊導出pdf，點擊pdf的圖示前往檔案，檔案為report.pdf
 
-| 點擊導出pdf前                                                                                           | 點擊後                                                                                    | 輸出結果(report.pdf)                                                                                    |
-|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/before_export.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/after_export.jpg"> | <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/report.jpg"> |
+| 操作方式                                                                                           | 
+|----------------------------------------------------------------------------------------------------|
+| <img src="https://github.com/partner0487/NTOU-credit-calculation/blob/master/image/pdf_demo.gif"> | 
 
 
 ## DEMO
