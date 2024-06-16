@@ -136,8 +136,6 @@ class HomeFragment : Fragment() {
 
         //新增核心選修
         addCoreElective.setOnClickListener {
-            coreElectiveNum += 2
-            val top = R.id.core_elective
             val lunch: List<String> = listOf("1","2","3","4","5","6")
             var singleChoiceIndex = 0
             AlertDialog.Builder(context)
@@ -146,6 +144,8 @@ class HomeFragment : Fragment() {
                     singleChoiceIndex = which
                 }
                 .setPositiveButton("確認") { dialog, _ ->
+                    coreElectiveNum += 2
+                    val top = R.id.core_elective
                     addClass(coreElectiveNum, r, layout, "", top, false, lunch[singleChoiceIndex], total)
                     dialog.dismiss()
                 }
@@ -164,8 +164,6 @@ class HomeFragment : Fragment() {
 
         //新增選修
         addElective.setOnClickListener {
-            electiveNum += 2
-            val top = R.id.elective
             val lunch: List<String> = listOf("1","2","3","4","5","6")
             var singleChoiceIndex = 0
             AlertDialog.Builder(context)
@@ -174,6 +172,8 @@ class HomeFragment : Fragment() {
                     singleChoiceIndex = which
                 }
                 .setPositiveButton("確認") { dialog, _ ->
+                    electiveNum += 2
+                    val top = R.id.elective
                     addClass(electiveNum, r, layout, "", top, false, lunch[singleChoiceIndex], total)
                     dialog.dismiss()
                 }
